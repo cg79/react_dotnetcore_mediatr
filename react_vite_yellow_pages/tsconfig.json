@@ -6,8 +6,7 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -18,8 +17,23 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": ".",
+    "paths": {
+      "@api": ["target/generated-sources/xs2r-client"],
+      "@assets": ["src/main/webapp/assets"],
+      "@assets/*": ["src/main/webapp/assets/*"],
+      "@config": ["src/main/webapp/config"],
+      "@config/*": ["src/main/webapp/config/*"],
+      "@components": ["src/main/webapp/components"],
+      "@components/*": ["src/main/webapp/components/*"],
+      "@hooks": ["src/main/webapp/hooks"],
+      "@hooks/*": ["src/main/webapp/hooks/*"],
+      "@util": ["src/main/webapp/util"],
+      "@util/*": ["src/main/webapp/util/*"]
+    },
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src"],
+  "include": ["src/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
