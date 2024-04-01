@@ -34,6 +34,7 @@
     <None Remove="Functionalities\User\Commands\" />
     <None Remove="Functionalities\User\Commands\Mutations\" />
     <None Remove="Functionalities\User\Commands\Queries\" />
+    <None Remove="Functionalities\User\Dto\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
@@ -44,5 +45,6 @@
     <Folder Include="Functionalities\User\Commands\" />
     <Folder Include="Functionalities\User\Commands\Mutations\" />
     <Folder Include="Functionalities\User\Commands\Queries\" />
+    <Folder Include="Functionalities\User\Dto\" />
   </ItemGroup>
 </Project>

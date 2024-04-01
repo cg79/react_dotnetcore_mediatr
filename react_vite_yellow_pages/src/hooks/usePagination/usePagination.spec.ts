@@ -1,21 +1,21 @@
-import { act, renderHook } from '@testing-library/react';
+import { act, renderHook } from "@testing-library/react";
 
-import usePagination from './usePagination';
+import usePagination from "./usePagination";
 
-describe('usePagination', () => {
-  it('should render currentPage, pageCount', () => {
+describe("usePagination", () => {
+  it("should render currentPage, pageCount", () => {
     const { result } = renderHook(() =>
       usePagination({ totalCount: 100, pageSize: 15, page: 1 })
     );
-    const { currentPage, pageCount } = result.current;
+    const { pageNo: currentPage, pageCount } = result.current;
 
     expect(currentPage).toEqual(1);
     expect(pageCount).toEqual(7);
   });
 
-  describe('when not loading', () => {
+  describe("when not loading", () => {
     it.each([[0], [1], [2], [3], [4], [5]])(
-      'should render next page (%s)',
+      "should render next page (%s)",
       (page: number) => {
         const { result } = renderHook(() =>
           usePagination({ totalCount: 100, pageSize: 15, page })
@@ -24,13 +24,13 @@ describe('usePagination', () => {
 
         act(() => nextPage(false));
 
-        const { currentPage } = result.current;
+        const { pageNo: currentPage } = result.current;
         expect(currentPage).toEqual(page + 1);
       }
     );
 
     it.each([[1], [2], [3], [4], [5], [6]])(
-      'should render previous page (%s)',
+      "should render previous page (%s)",
       (page: number) => {
         const { result } = renderHook(() =>
           usePagination({ totalCount: 100, pageSize: 15, page })
@@ -39,12 +39,12 @@ describe('usePagination', () => {
 
         act(() => previousPage(false));
 
-        const { currentPage } = result.current;
+        const { pageNo: currentPage } = result.current;
         expect(currentPage).toEqual(page - 1);
       }
     );
 
-    it('should render defined currentPage', () => {
+    it("should render defined currentPage", () => {
       const { result } = renderHook(() =>
         usePagination({ totalCount: 100, pageSize: 15, page: 1 })
       );
@@ -52,11 +52,11 @@ describe('usePagination', () => {
 
       act(() => changePage(5, false));
 
-      const { currentPage } = result.current;
+      const { pageNo: currentPage } = result.current;
       expect(currentPage).toEqual(5);
     });
 
-    it.each([[-1], [10]])('should not render new page', (newPage: number) => {
+    it.each([[-1], [10]])("should not render new page", (newPage: number) => {
       const { result } = renderHook(() =>
         usePagination({ totalCount: 100, pageSize: 15, page: 1 })
       );
@@ -64,13 +64,13 @@ describe('usePagination', () => {
 
       act(() => changePage(newPage, false));
 
-      const { currentPage } = result.current;
+      const { pageNo: currentPage } = result.current;
       expect(currentPage).toEqual(1);
     });
   });
 
-  describe('when loading', () => {
-    it('should not render on previous page request', () => {
+  describe("when loading", () => {
+    it("should not render on previous page request", () => {
       const { result } = renderHook(() =>
         usePagination({ totalCount: 100, pageSize: 15, page: 1 })
       );
@@ -78,11 +78,11 @@ describe('usePagination', () => {
 
       act(() => previousPage(true));
 
-      const { currentPage } = result.current;
+      const { pageNo: currentPage } = result.current;
       expect(currentPage).toEqual(1);
     });
 
-    it('should not render on next page request', () => {
+    it("should not render on next page request", () => {
       const { result } = renderHook(() =>
         usePagination({ totalCount: 100, pageSize: 15, page: 1 })
       );
@@ -90,11 +90,11 @@ describe('usePagination', () => {
 
       act(() => nextPage(true));
 
-      const { currentPage } = result.current;
+      const { pageNo: currentPage } = result.current;
       expect(currentPage).toEqual(1);
     });
 
-    it('should not render on change page request', () => {
+    it("should not render on change page request", () => {
       const { result } = renderHook(() =>
         usePagination({ totalCount: 100, pageSize: 15, page: 1 })
       );
@@ -102,7 +102,7 @@ describe('usePagination', () => {
 
       act(() => changePage(5, true));
 
-      const { currentPage } = result.current;
+      const { pageNo: currentPage } = result.current;
       expect(currentPage).toEqual(1);
     });
   });

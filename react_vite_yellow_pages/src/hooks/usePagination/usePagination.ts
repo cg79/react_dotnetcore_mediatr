@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
 export type usePaginationResult = {
-  currentPage: number;
+  pageNo: number;
   pageCount: number;
   pageSize: number;
   previousPage: (isLoading: boolean) => void;
@@ -13,7 +13,7 @@ export type usePaginationResult = {
 
 const usePagination = (): usePaginationResult => {
   const [pageSize, setPageSize] = useState<number>(2);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [pageNo, setPageNo] = useState<number>(1);
   const [pageCount, setPageCount] = useState<number>(0);
   const [totalCount, setTotalCount] = useState<number>(0);
 
@@ -28,24 +28,24 @@ const usePagination = (): usePaginationResult => {
   const changePage = useCallback(
     (page: number, isLoading: boolean) => {
       if (!isLoading && page >= 0 && page < pageCount) {
-        setCurrentPage(page);
+        setPageNo(page);
       }
     },
-    [setCurrentPage, pageCount]
+    [setPageNo, pageCount]
   );
 
   const previousPage = useCallback(
-    (isLoading: boolean) => changePage(Math.max(currentPage - 1, 0), isLoading),
-    [changePage, currentPage]
+    (isLoading: boolean) => changePage(Math.max(pageNo - 1, 0), isLoading),
+    [changePage, pageNo]
   );
   const nextPage = useCallback(
     (isLoading: boolean) =>
-      changePage(Math.min(currentPage + 1, pageCount - 1), isLoading),
-    [changePage, currentPage, pageCount]
+      changePage(Math.min(pageNo + 1, pageCount - 1), isLoading),
+    [changePage, pageNo, pageCount]
   );
 
   return {
-    currentPage,
+    pageNo,
     pageCount,
     previousPage,
     nextPage,

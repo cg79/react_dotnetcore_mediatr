@@ -6,10 +6,7 @@ import useUsers from "../hooks/useUsers/useUsers";
 
 const UsersList = () => {
   const { users } = useUsers();
-  const { currentPage, pageCount, changePage } = usePagination({
-    totalCount: users.length,
-    page: 1,
-  });
+  const { pageNo, pageCount, changePage } = usePagination();
 
   const onEdit = (user: UserType) => {
     console.log(user);
@@ -38,17 +35,17 @@ const UsersList = () => {
       </div>
       <div>
         <button
-          onClick={() => changePage(currentPage - 1, false)}
-          disabled={currentPage === 1}
+          onClick={() => changePage(pageNo - 1, false)}
+          disabled={pageNo === 1}
         >
           Previous
         </button>
         <span>
-          Page {currentPage} of {pageCount}
+          Page {pageNo} of {pageCount}
         </span>
         <button
-          onClick={() => changePage(currentPage + 1, false)}
-          disabled={currentPage === pageCount}
+          onClick={() => changePage(pageNo + 1, false)}
+          disabled={pageNo === pageCount}
         >
           Next
         </button>
