@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
+    <PackageReference Include="coverlet.collector" Version="3.2.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="xunit" Version="2.7.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="xunit.runner.utility" Version="2.7.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cqrsVerticalSlices\cqrsVerticalSlices.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Tests\" />
+    <None Remove="Mocks\" />
+    <None Remove="Tests\Mock\" />
+    <None Remove="Tests\User\" />
+    <None Remove="Tests\User\Queries\" />
+    <None Remove="Tests\User\Mutations\" />
+    <None Remove="Tests\User\Controller\" />
+    <None Remove="Tests\User\Integration\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Tests\" />
+    <Folder Include="Mocks\" />
+    <Folder Include="Tests\Mock\" />
+    <Folder Include="Tests\User\" />
+    <Folder Include="Tests\User\Queries\" />
+    <Folder Include="Tests\User\Mutations\" />
+    <Folder Include="Tests\User\Controller\" />
+    <Folder Include="Tests\User\Integration\" />
+  </ItemGroup>
+</Project>

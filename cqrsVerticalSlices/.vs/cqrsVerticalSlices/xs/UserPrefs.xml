@@ -1,0 +1,75 @@
+﻿<Properties StartupConfiguration="{3D7AB5FC-7716-48BB-B05F-488D161523FB}|https">
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Controllers/WeatherForecastController.cs" relfile="Controllers/WeatherForecastController.cs" line="53" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/UnitTest1.cs" line="28" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/UnitTest1.cs" line="55" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Migrations/20210828175305_InitialCreate.cs" relfile="Migrations/20210828175305_InitialCreate.cs" line="10" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Queries/FindUserByPhoneNumberQueryHandler.cs" relfile="Queries/FindUserByPhoneNumberQueryHandler.cs" line="23" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Queries/FindUserByPhoneNumberQueryHandler.cs" relfile="Queries/FindUserByPhoneNumberQueryHandler.cs" line="24" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/Tests/UserController.Test.cs" line="85" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="51" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Queries/FindUserByIdQueryHandler.cs" relfile="Queries/FindUserByIdQueryHandler.cs" line="23" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="53" column="1" />
+      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/Tests/UserController.Test.cs" line="38" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../cqrsTests/Tests/GetEntityById.Test.cs">
+    <Files>
+      <File FileName="../cqrsTests/Tests/UserController.Test.cs" Line="31" Column="22" />
+      <File FileName="Controllers/UserController.cs" Line="24" Column="6" />
+      <File FileName="../cqrsTests/UnitTest1.cs" Line="55" Column="1" />
+      <File FileName="Helpers/LoggingBehavior.cs" Line="34" Column="18" />
+      <File FileName="Program.cs" Line="17" Column="1" />
+      <File FileName="Queries/FindUserByIdQuery.cs" Line="7" Column="35" />
+      <File FileName="Queries/FindUserByPhoneNumberQueryHandler.cs" Line="1" Column="1" />
+      <File FileName="Queries/FindUserByIdQueryHandler.cs" Line="26" Column="6" />
+      <File FileName="../cqrsTests/Tests/Aaa.cs" Line="20" Column="24" />
+      <File FileName="Migrations/DataContextModelSnapshot.cs" Line="11" Column="34" />
+      <File FileName="Commands/CreateUserCommand.cs" Line="6" Column="18" />
+      <File FileName="../cqrsTests/Mocks/DbContextMock.cs" Line="18" Column="58" />
+      <File FileName="Queries/FindUserByPhoneNumberQuery.cs" Line="1" Column="1" />
+      <File FileName="../cqrsTests/Handlers/GetEntityById.cs" Line="13" Column="11" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="cqrsVerticalSlices">
+            <Node name="cqrsTests" expanded="True" selected="True">
+              <Node name="Tests" expanded="True">
+                <Node name="Handlers" expanded="True" />
+              </Node>
+            </Node>
+            <Node name="cqrsVerticalSlices">
+              <Node name="Commands" expanded="True" />
+              <Node name="Controllers" expanded="True" />
+              <Node name="Helpers" expanded="True" />
+              <Node name="Migrations" expanded="True" />
+              <Node name="Queries" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="cqrsVerticalSlices">
+            <Node name="cqrsTests" expanded="True">
+              <Node name="cqrsTests" expanded="True" />
+              <Node name="UserControllerIntegrationTests" expanded="True" />
+              <Node name="UserControllerTests" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State>
+          <Value>id</Value>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.cqrsVerticalSlices PreferredExecutionTarget="/Applications/Google Chrome.app" />
+</Properties>

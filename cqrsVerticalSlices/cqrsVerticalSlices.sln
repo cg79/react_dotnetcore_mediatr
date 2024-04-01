@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1706.10
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cqrsVerticalSlices", "cqrsVerticalSlices.csproj", "{3D7AB5FC-7716-48BB-B05F-488D161523FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cqrsTests", "..\cqrsTests\cqrsTests.csproj", "{7D089DC0-4368-413C-A982-7B8A8ECF8E02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D7AB5FC-7716-48BB-B05F-488D161523FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D7AB5FC-7716-48BB-B05F-488D161523FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D7AB5FC-7716-48BB-B05F-488D161523FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D7AB5FC-7716-48BB-B05F-488D161523FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D089DC0-4368-413C-A982-7B8A8ECF8E02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D089DC0-4368-413C-A982-7B8A8ECF8E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D089DC0-4368-413C-A982-7B8A8ECF8E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D089DC0-4368-413C-A982-7B8A8ECF8E02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D7C242ED-5064-40B1-8066-03CF471B0946}
+	EndGlobalSection
+EndGlobal

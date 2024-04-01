@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.17" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.17">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.17">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Migrations\" />
+    <None Remove="Functionalities\" />
+    <None Remove="Functionalities\User\" />
+    <None Remove="Functionalities\User\Mutations\" />
+    <None Remove="Functionalities\User\Queries\" />
+    <None Remove="Functionalities\User\Commands\" />
+    <None Remove="Functionalities\User\Commands\Mutations\" />
+    <None Remove="Functionalities\User\Commands\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="Functionalities\" />
+    <Folder Include="Functionalities\User\" />
+    <Folder Include="Functionalities\User\Mutations\" />
+    <Folder Include="Functionalities\User\Queries\" />
+    <Folder Include="Functionalities\User\Commands\" />
+    <Folder Include="Functionalities\User\Commands\Mutations\" />
+    <Folder Include="Functionalities\User\Commands\Queries\" />
+  </ItemGroup>
+</Project>
