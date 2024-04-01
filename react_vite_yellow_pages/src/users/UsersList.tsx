@@ -5,8 +5,11 @@ import usePagination from "../hooks/usePagination/usePagination";
 import useUsers from "../hooks/useUsers/useUsers";
 
 const UsersList = () => {
-  const { users } = useUsers();
-  const { pageNo, pageCount, changePage } = usePagination();
+  const { currentPage, pageSize, nextPage, prevPage } = usePagination();
+  const { users, totalCount, loading, error } = useUsers(currentPage, pageSize);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   const onEdit = (user: UserType) => {
     console.log(user);
@@ -34,18 +37,15 @@ const UsersList = () => {
         ))}
       </div>
       <div>
-        <button
-          onClick={() => changePage(pageNo - 1, false)}
-          disabled={pageNo === 1}
-        >
+        <button onClick={prevPage} disabled={currentPage === 1}>
           Previous
         </button>
         <span>
-          Page {pageNo} of {pageCount}
+          Page {currentPage} of {Math.floor(totalCount / pageSize)}
         </span>
         <button
-          onClick={() => changePage(pageNo + 1, false)}
-          disabled={pageNo === pageCount}
+          onClick={nextPage}
+          disabled={currentPage * pageSize >= totalCount}
         >
           Next
         </button>
