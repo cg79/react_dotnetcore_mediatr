@@ -7,24 +7,21 @@ using Microsoft.EntityFrameworkCore;
 
 namespace cqrsVerticalSlices.Mutations
 {
-    public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand>
+    public class DeleteUserByPhoneNumberCommandHandler : IRequestHandler<DeleteUserByPhoneCommand>
     {
         private readonly DataContext _context;
 
-        public DeleteUserCommandHandler(DataContext context)
+        public DeleteUserByPhoneNumberCommandHandler(DataContext context)
         {
             _context = context;
         }
 
-        public async Task<Unit> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteUserByPhoneCommand request, CancellationToken cancellationToken)
         {
-            if (request.Id != 0)
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == request.PhoneNumber);
+            if (user != null)
             {
-                var user = await _context.Users.FindAsync(request.Id);
-                if (user != null)
-                {
-                    _context.Users.Remove(user);
-                }
+                _context.Users.Remove(user);
             }
 
             await _context.SaveChangesAsync(cancellationToken);

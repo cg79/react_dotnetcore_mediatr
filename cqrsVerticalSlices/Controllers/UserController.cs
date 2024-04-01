@@ -37,13 +37,21 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-    // DELETE api/user/5
-    [HttpDelete("{id}")]
+    [HttpDelete("id/{id}")]
     public async Task<IActionResult> DeleteUser(int id)
     {
         await _mediator.Send(new DeleteUserCommand { Id = id });
         return NoContent();
     }
+
+    [HttpDelete("phoneNumber/{phoneNumber}")]
+    public async Task<IActionResult> DeleteUserByPhoneNumber(string phoneNumber)
+    {
+        await _mediator.Send(new DeleteUserByPhoneCommand { PhoneNumber = phoneNumber });
+        return NoContent();
+    }
+
+
 
     // GET api/user/5
     [HttpGet("{id}")]

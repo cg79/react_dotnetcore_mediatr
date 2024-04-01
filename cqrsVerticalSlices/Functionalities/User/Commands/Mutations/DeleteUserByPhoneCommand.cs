@@ -3,9 +3,9 @@ using MediatR;
 
 namespace cqrsVerticalSlices.Functionalities.User.Commands.Mutations
 {
-    public class DeleteUserCommand : IRequest
+    public class DeleteUserByPhoneCommand : IRequest
     {
-        public int Id { get; set; }
+        public required string PhoneNumber { get; set; }
     }
 }
 

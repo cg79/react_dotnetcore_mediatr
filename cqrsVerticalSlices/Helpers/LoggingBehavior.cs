@@ -28,9 +28,9 @@ namespace CQRSVerticalSlices.Helpers
                     var requestData = JsonSerializer.Serialize(request);
                     _logger.LogInformation($"[DATA] With data: {requestData}");
                 }
-                catch (System.Exception)
+                catch (System.Exception ex)
                 {
-                    _logger.LogInformation("[Serialization ERROR] Could not serialize the request.");
+                    _logger.LogInformation("[Serialization ERROR] Could not serialize the request.", ex);
                 }
                 response = await next();
             }

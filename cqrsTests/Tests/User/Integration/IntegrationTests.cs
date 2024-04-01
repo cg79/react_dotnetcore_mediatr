@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace YourNamespace.IntegrationTests
+namespace cqrsTests.Tests.User.Integration
 {
     public class UserControllerIntegrationTests1 : IClassFixture<WebApplicationFactory<Startup>>
     {
@@ -26,7 +26,7 @@ namespace YourNamespace.IntegrationTests
         {
             // Arrange
             var client = _factory.CreateClient();
-            var command = new CreateUserCommand { FirstName="a", LastName="b", PhoneNumber="1" };
+            var command = new CreateUserCommand { FirstName = "a", LastName = "b", PhoneNumber = "1234567891" };
             var content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json");
 
             // Act
@@ -43,8 +43,8 @@ namespace YourNamespace.IntegrationTests
         {
             // Arrange
             var client = _factory.CreateClient();
-            var id = 5; // Assuming there is an existing user with this ID
-            var command = new UpdateUserCommand { Id = id, FirstName = "a", LastName = "b", PhoneNumber = "1"  };
+            var id = 2; 
+            var command = new UpdateUserCommand { Id = id, FirstName = "a", LastName = "b", PhoneNumber = "1234567891" };
             var content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json");
 
             // Act
@@ -53,9 +53,40 @@ namespace YourNamespace.IntegrationTests
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
             Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
-            // Additional assertions if needed
         }
 
-        // Add more tests for other endpoints similarly
+        [Fact]
+        public async Task DeleteUser_WhenUserExists_ReturnsNoContent()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+            var userId = 1; // Assuming this is a valid user id that exists in the database
+            var requestUri = $"/api/user/id/{userId}";
+
+            // Act
+            var response = await client.DeleteAsync(requestUri);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task DeleteUserByPhoneNumber_WhenUserExists_ReturnsNoContent()
+        {
+            // Arrange
+            var client = _factory.CreateClient();
+            var phoneNumber = "1234567891"; 
+            var requestUri = $"/api/user/phoneNumber/{phoneNumber}";
+
+            // Act
+            var response = await client.DeleteAsync(requestUri);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+        }
+
+
+        
+
     }
 }
