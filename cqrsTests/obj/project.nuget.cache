@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "c5UxgSnOe+G+WemRtMDT6kb/XL39NG6MJ25cGErvo8JsAjYmXmULU7LuIZU2JTE9X1TEEwrAE/lspco6CxZa2g==",
+  "dgSpecHash": "9yYu78XqxUbgKtestJ9Sa8i21AlikzUDo9OKCixcw6L6e1Csr1mGq6oYvfaqI1fAwDqs1yfGGq4gYIBX/yOeYA==",
   "success": true,
   "projectFilePath": "/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/cqrsTests.csproj",
   "expectedPackageFiles": [
@@ -53,7 +53,7 @@
     "/Users/claudiugombos/.nuget/packages/microsoft.testplatform.objectmodel/17.5.0/microsoft.testplatform.objectmodel.17.5.0.nupkg.sha512",
     "/Users/claudiugombos/.nuget/packages/microsoft.testplatform.testhost/17.5.0/microsoft.testplatform.testhost.17.5.0.nupkg.sha512",
     "/Users/claudiugombos/.nuget/packages/moq/4.20.70/moq.4.20.70.nupkg.sha512",
-    "/Users/claudiugombos/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
+    "/Users/claudiugombos/.nuget/packages/newtonsoft.json/13.0.3/newtonsoft.json.13.0.3.nupkg.sha512",
     "/Users/claudiugombos/.nuget/packages/nuget.frameworks/5.11.0/nuget.frameworks.5.11.0.nupkg.sha512",
     "/Users/claudiugombos/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.4/sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
     "/Users/claudiugombos/.nuget/packages/sqlitepclraw.core/2.1.4/sqlitepclraw.core.2.1.4.nupkg.sha512",

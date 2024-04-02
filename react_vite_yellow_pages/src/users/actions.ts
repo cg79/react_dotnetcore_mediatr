@@ -3,6 +3,18 @@ import { settings } from "../settings";
 import UserType from "src/types/UserType";
 
 class UserActions {
+  getUsers = async (currentPage = 1, pageSize = 2) => {
+    try {
+      // eslint-disable-next-line no-debugger
+      debugger;
+      const response = await axios.get(
+        `${settings.SERVER_URL}/api/user/list?pageNumber=${currentPage}&pageSize=${pageSize}`
+      );
+      return this.processAxiosResponse(response);
+    } catch (error: AxiosError | unknown) {
+      return this.processAxiosError(error);
+    }
+  };
   updateUser = async (user: UserType) => {
     try {
       // eslint-disable-next-line no-debugger
@@ -11,7 +23,7 @@ class UserActions {
         `${settings.SERVER_URL}/api/user/${user.id}`,
         user
       );
-      return response.data;
+      return this.processAxiosResponse(response);
     } catch (error: AxiosError | unknown) {
       return this.processAxiosError(error);
     }
@@ -24,7 +36,7 @@ class UserActions {
       const response = await axios.delete(
         `${settings.SERVER_URL}/api/user/id/${user.id}`
       );
-      return response.data;
+      return this.processAxiosResponse(response);
     } catch (error: AxiosError | unknown) {
       return this.processAxiosError(error);
     }
@@ -38,10 +50,19 @@ class UserActions {
         `${settings.SERVER_URL}/api/user`,
         user
       );
-      return response.data;
+      return this.processAxiosResponse(response);
     } catch (error: AxiosError | unknown) {
       return this.processAxiosError(error);
     }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  processAxiosResponse = (response: any) => {
+    const { data } = response;
+    if (data.success) {
+      return data.data || {};
+    }
+    return data;
   };
 
   processAxiosError = (error: AxiosError | unknown) => {

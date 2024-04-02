@@ -23,6 +23,7 @@ const EditUser = ({
   };
 
   const handleSave = async () => {
+    setError(null);
     const response = await userActions.updateUser(editedUser);
     // eslint-disable-next-line no-debugger
     debugger;
@@ -57,7 +58,7 @@ const EditUser = ({
         <button onClick={handleSave}>Save</button>
         <button onClick={onCancel}>Cancel</button>
       </div>
-      <>{error && <div>{error}</div>}</>
+      <>{error && <div className="error">{error}</div>}</>
     </>
   );
 };

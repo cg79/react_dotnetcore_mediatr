@@ -15,8 +15,9 @@ const CreateUserForm = ({
 
   const handleSave = async () => {
     // Validate input
+    setError(null);
     if (!firstName || !lastName || !phoneNumber) {
-      alert("Please fill in all fields");
+      setError("Please fill in all fields");
       return;
     }
 
