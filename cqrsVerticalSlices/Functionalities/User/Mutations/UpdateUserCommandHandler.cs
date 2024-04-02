@@ -2,6 +2,7 @@
 using cqrsVerticalSlices.Functionalities.User.Commands.Mutations;
 using CQRSVerticalSlices.Data;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace cqrsVerticalSlices.Mutations
 {
@@ -21,6 +22,13 @@ namespace cqrsVerticalSlices.Mutations
             if (user == null)
             {
                 throw new Exception("User not found.");
+            }
+
+            // Check if the new phone number is already associated with another user
+            var existingUserWithPhoneNumber = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == request.PhoneNumber && u.Id != request.Id);
+            if (existingUserWithPhoneNumber != null)
+            {
+                throw new Exception("Phone number is already associated with another user.");
             }
 
             user.FirstName = request.FirstName;

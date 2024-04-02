@@ -3,53 +3,79 @@
 import UserType from "src/types/UserType";
 import usePagination from "../hooks/usePagination/usePagination";
 import useUsers from "../hooks/useUsers/useUsers";
+import UserInformation from "./UserInformation";
+import { useState } from "react";
+import Pagination from "../components/pagination/Pagination";
+import EditUser from "./EditUser";
+import CreateUserForm from "./CreateUserForm";
 
 const UsersList = () => {
+  const [editedUser, setEditedUser] = useState<UserType | null>(null);
+  const [creationMode, setCreationMode] = useState(false);
   const { currentPage, pageSize, nextPage, prevPage } = usePagination();
-  const { users, totalCount, loading, error } = useUsers(currentPage, pageSize);
+  const { users, totalCount, loading, error, setReload } = useUsers(
+    currentPage,
+    pageSize
+  );
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
   const onEdit = (user: UserType) => {
-    console.log(user);
+    setEditedUser(user);
+  };
+
+  const onUserUpdated = async () => {
+    setEditedUser(null);
+    setReload(new Date().toString());
   };
   return (
     <div>
       <h2>User List</h2>
       <div>
-        {users.map((user) => (
-          <div key={user.id}>
-            <div className="flex">
-              <span>Name:</span> {user.firstName} {user.lastName}
-            </div>
-            <div className="flex just_between">
-              <div>
-                <span>Phone:</span> {user.phoneNumber}
-              </div>
+        {users.map((user) =>
+          editedUser && editedUser.id === user.id ? (
+            <EditUser
+              key={user.id}
+              user={user}
+              onSave={onUserUpdated}
+              onCancel={() => setEditedUser(null)}
+            />
+          ) : (
+            <UserInformation
+              key={user.id}
+              user={user}
+              onEdit={onEdit}
+              onReload={() => setReload(new Date().toString())}
+            />
+          )
+        )}
+      </div>
+      {totalCount > 0 && (
+        <Pagination
+          currentPage={currentPage}
+          pageSize={pageSize}
+          totalCount={totalCount}
+          nextPage={nextPage}
+          prevPage={prevPage}
+        />
+      )}
 
-              <div className="flex right-align">
-                <button onClick={() => onEdit(user)}>Edit</button>
-              </div>
-            </div>
-            <hr></hr>
-          </div>
-        ))}
-      </div>
-      <div>
-        <button onClick={prevPage} disabled={currentPage === 1}>
-          Previous
-        </button>
-        <span>
-          Page {currentPage} of {Math.floor(totalCount / pageSize)}
-        </span>
-        <button
-          onClick={nextPage}
-          disabled={currentPage * pageSize >= totalCount}
-        >
-          Next
-        </button>
-      </div>
+      {!creationMode && (
+        <div className="mt10">
+          <button onClick={() => setCreationMode(true)}>New User</button>
+        </div>
+      )}
+
+      {creationMode && (
+        <CreateUserForm
+          onReload={() => {
+            setCreationMode(false);
+            setReload(new Date().toString());
+          }}
+          onCancel={() => setCreationMode(false)}
+        ></CreateUserForm>
+      )}
     </div>
   );
 };

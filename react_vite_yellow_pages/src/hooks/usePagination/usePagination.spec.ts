@@ -1,109 +1,68 @@
-import { act, renderHook } from "@testing-library/react";
-
+import { renderHook, act } from "@testing-library/react";
 import usePagination from "./usePagination";
 
 describe("usePagination", () => {
-  it("should render currentPage, pageCount", () => {
-    const { result } = renderHook(() =>
-      usePagination({ totalCount: 100, pageSize: 15, page: 1 })
-    );
-    const { pageNo: currentPage, pageCount } = result.current;
+  it("should initialize with default values", () => {
+    const { result } = renderHook(() => usePagination());
 
-    expect(currentPage).toEqual(1);
-    expect(pageCount).toEqual(7);
+    expect(result.current.currentPage).toBe(1);
+    expect(result.current.pageSize).toBe(2);
   });
 
-  describe("when not loading", () => {
-    it.each([[0], [1], [2], [3], [4], [5]])(
-      "should render next page (%s)",
-      (page: number) => {
-        const { result } = renderHook(() =>
-          usePagination({ totalCount: 100, pageSize: 15, page })
-        );
-        const { nextPage } = result.current;
+  it("should initialize with custom values", () => {
+    const { result } = renderHook(() => usePagination(3, 5));
 
-        act(() => nextPage(false));
-
-        const { pageNo: currentPage } = result.current;
-        expect(currentPage).toEqual(page + 1);
-      }
-    );
-
-    it.each([[1], [2], [3], [4], [5], [6]])(
-      "should render previous page (%s)",
-      (page: number) => {
-        const { result } = renderHook(() =>
-          usePagination({ totalCount: 100, pageSize: 15, page })
-        );
-        const { previousPage } = result.current;
-
-        act(() => previousPage(false));
-
-        const { pageNo: currentPage } = result.current;
-        expect(currentPage).toEqual(page - 1);
-      }
-    );
-
-    it("should render defined currentPage", () => {
-      const { result } = renderHook(() =>
-        usePagination({ totalCount: 100, pageSize: 15, page: 1 })
-      );
-      const { changePage } = result.current;
-
-      act(() => changePage(5, false));
-
-      const { pageNo: currentPage } = result.current;
-      expect(currentPage).toEqual(5);
-    });
-
-    it.each([[-1], [10]])("should not render new page", (newPage: number) => {
-      const { result } = renderHook(() =>
-        usePagination({ totalCount: 100, pageSize: 15, page: 1 })
-      );
-      const { changePage } = result.current;
-
-      act(() => changePage(newPage, false));
-
-      const { pageNo: currentPage } = result.current;
-      expect(currentPage).toEqual(1);
-    });
+    expect(result.current.currentPage).toBe(3);
+    expect(result.current.pageSize).toBe(5);
   });
 
-  describe("when loading", () => {
-    it("should not render on previous page request", () => {
-      const { result } = renderHook(() =>
-        usePagination({ totalCount: 100, pageSize: 15, page: 1 })
-      );
-      const { previousPage } = result.current;
+  it("should increment currentPage on nextPage", () => {
+    const { result } = renderHook(() => usePagination());
 
-      act(() => previousPage(true));
-
-      const { pageNo: currentPage } = result.current;
-      expect(currentPage).toEqual(1);
+    act(() => {
+      result.current.nextPage();
     });
 
-    it("should not render on next page request", () => {
-      const { result } = renderHook(() =>
-        usePagination({ totalCount: 100, pageSize: 15, page: 1 })
-      );
-      const { nextPage } = result.current;
+    expect(result.current.currentPage).toBe(2);
+  });
 
-      act(() => nextPage(true));
+  it("should decrement currentPage on prevPage", () => {
+    const { result } = renderHook(() => usePagination(2));
 
-      const { pageNo: currentPage } = result.current;
-      expect(currentPage).toEqual(1);
+    act(() => {
+      result.current.prevPage();
     });
 
-    it("should not render on change page request", () => {
-      const { result } = renderHook(() =>
-        usePagination({ totalCount: 100, pageSize: 15, page: 1 })
-      );
-      const { changePage } = result.current;
+    expect(result.current.currentPage).toBe(1);
+  });
 
-      act(() => changePage(5, true));
+  it("should not decrement currentPage below 1 on prevPage", () => {
+    const { result } = renderHook(() => usePagination());
 
-      const { pageNo: currentPage } = result.current;
-      expect(currentPage).toEqual(1);
+    act(() => {
+      result.current.prevPage();
     });
+
+    expect(result.current.currentPage).toBe(1);
+  });
+
+  it("should set currentPage", () => {
+    const { result } = renderHook(() => usePagination());
+
+    act(() => {
+      result.current.setCurrentPage(3);
+    });
+
+    expect(result.current.currentPage).toBe(3);
+  });
+
+  it("should set pageSize", () => {
+    const { result } = renderHook(() => usePagination());
+
+    act(() => {
+      result.current.setPageSize(10);
+    });
+
+    expect(result.current.pageSize).toBe(10);
   });
 });

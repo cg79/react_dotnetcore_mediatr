@@ -40,3 +40,24 @@
 .read-the-docs {
   color: #888;
 }
+
+label {
+  width: 200px;
+  display: block;
+}
+
+.ml5{
+  margin-left: 5px;
+}
+.mt5{
+  margin-top: 5px;
+}
+
+.mt10{
+  margin-top: 10px;
+}
+
+.center{
+  text-align: center;
+  justify-content: center;
+}
