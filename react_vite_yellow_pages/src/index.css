@@ -84,3 +84,7 @@ button:focus-visible {
 .just_between {
   justify-content: space-between;
 }
+
+.space_evenly {
+  justify-content: space-evenly;
+}

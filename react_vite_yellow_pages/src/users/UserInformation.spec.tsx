@@ -12,7 +12,7 @@ describe("UserInformation", () => {
   it("renders user information correctly", () => {
     const onEdit = jest.fn();
     const { getByText } = render(
-      <UserInformation user={user} onEdit={onEdit} />
+      <UserInformation user={user} onEdit={onEdit} onReload={() => {}} />
     );
 
     expect(getByText("Name:")).toBeInTheDocument();
@@ -25,7 +25,7 @@ describe("UserInformation", () => {
   it("calls onEdit function when edit button is clicked", () => {
     const onEdit = jest.fn();
     const { getByText } = render(
-      <UserInformation user={user} onEdit={onEdit} />
+      <UserInformation user={user} onEdit={onEdit} onReload={() => {}} />
     );
     fireEvent.click(getByText("Edit"));
     expect(onEdit).toHaveBeenCalledWith(user);

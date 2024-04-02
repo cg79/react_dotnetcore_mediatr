@@ -36,25 +36,51 @@ const EditUser = ({
 
   return (
     <>
-      <div>
-        <input
-          type="text"
-          name="firstName"
-          value={editedUser.firstName}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="lastName"
-          value={editedUser.lastName}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="phoneNumber"
-          value={editedUser.phoneNumber}
-          onChange={handleChange}
-        />
+      <div className="flex mt5">
+        <div>
+          <label htmlFor="firstName">First Name:</label>
+        </div>
+        <div className="ml5">
+          <input
+            id="firstName"
+            name="firstName"
+            type="text"
+            value={editedUser.firstName}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="flex mt5">
+        <div>
+          <label htmlFor="lastName">Last Name:</label>
+        </div>
+        <div className="ml5">
+          <input
+            id="lastName"
+            name="lastName"
+            type="text"
+            value={editedUser.lastName}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="flex mt5">
+        <div>
+          <label htmlFor="phoneNumber">Phone Number:</label>
+        </div>
+        <div className="ml5">
+          <input
+            id="phoneNumber"
+            type="text"
+            value={editedUser.phoneNumber}
+            onChange={handleChange}
+          />
+        </div>
+      </div>
+
+      <div className="flex space_evenly mt10">
         <button onClick={handleSave}>Save</button>
         <button onClick={onCancel}>Cancel</button>
       </div>
