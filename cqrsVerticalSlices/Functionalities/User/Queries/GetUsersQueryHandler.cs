@@ -1,6 +1,7 @@
 ﻿using System;
 using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
 using cqrsVerticalSlices.Functionalities.User.Dto;
+using cqrsVerticalSlices.Functionalities.User.Repository;
 using cqrsVerticalSlices.Models;
 using CQRSVerticalSlices.Data;
 using MediatR;
@@ -10,30 +11,16 @@ namespace cqrsVerticalSlices.Mutations
 {
     public class GetUsersQueryHandler : IRequestHandler<GetUsersQuery, UserResultDto>
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public GetUsersQueryHandler(DataContext context)
+        public GetUsersQueryHandler(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         async Task<UserResultDto> IRequestHandler<GetUsersQuery, UserResultDto>.Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _context.Users
-                .OrderBy(u => u.PhoneNumber)
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToListAsync(cancellationToken);
-
-            var totalCount = await _context.Users.CountAsync();
-
-            var userResult = new UserResultDto
-            {
-                Users = users,
-                TotalCount = totalCount
-            };
-
-            return userResult;
+            return await _userRepository.GetUsersAsync(request.PageNumber, request.PageSize, cancellationToken);
         }
     }
 }

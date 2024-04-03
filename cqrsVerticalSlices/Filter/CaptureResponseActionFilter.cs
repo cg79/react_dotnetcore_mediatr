@@ -47,10 +47,7 @@ namespace cqrsVerticalSlices.Filter
                     resultContext.Exception = null;
                     // Return the error response
                     resultContext.Result = new OkObjectResult(errorResponse);
-                    //context.Result = new OkObjectResult(errorResponse);
-                    //{
-                    //    StatusCode = 500 // Internal Server Error
-                    //};
+                    
                 }
             }
             catch (Exception ex)
