@@ -38,6 +38,7 @@
     <None Remove="Functionalities\User\Dto\" />
     <None Remove="MIddleware\" />
     <None Remove="Filter\" />
+    <None Remove="Functionalities\User\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\" />
@@ -51,5 +52,6 @@
     <Folder Include="Functionalities\User\Dto\" />
     <Folder Include="MIddleware\" />
     <Folder Include="Filter\" />
+    <Folder Include="Functionalities\User\Repository\" />
   </ItemGroup>
 </Project>
