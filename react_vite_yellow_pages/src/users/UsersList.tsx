@@ -8,6 +8,7 @@ import { useState } from "react";
 import Pagination from "../components/pagination/Pagination";
 import EditUser from "./edit-user/EditUser";
 import CreateUser from "./create-user/CreateUser";
+import UserSearch from "./user-search/UserSearch";
 
 const UsersList = () => {
   const [editedUser, setEditedUser] = useState<UserType | null>(null);
@@ -32,6 +33,9 @@ const UsersList = () => {
   return (
     <div>
       <h2>User List</h2>
+      <div className="mt10">
+        <UserSearch></UserSearch>
+      </div>
       <div>
         {users.map((user) =>
           editedUser && editedUser.id === user.id ? (

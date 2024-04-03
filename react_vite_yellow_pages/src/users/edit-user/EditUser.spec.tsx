@@ -1,4 +1,4 @@
-import { act, render, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import EditUser from "./EditUser";
 import UserType from "../../types/UserType";
 
