@@ -4,6 +4,7 @@ using cqrsVerticalSlices.Models;
 using MediatR;
 using cqrsVerticalSlices.Functionalities.User.Dto;
 using Microsoft.EntityFrameworkCore;
+using cqrsVerticalSlices.Functionalities.User.Commands.Mutations;
 
 namespace cqrsVerticalSlices.Functionalities.User.Repository
 {
@@ -47,6 +48,26 @@ namespace cqrsVerticalSlices.Functionalities.User.Repository
             };
 
             return userResult;
+        }
+
+        public async Task<Unit> CreateUserAsync(CreateUserCommand request, CancellationToken cancellationToken)
+        {
+            if (_context.Users.Any(u => u.PhoneNumber == request.PhoneNumber))
+            {
+                throw new Exception("Contact already exists.");
+            }
+
+            var user = new UserEntity
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                PhoneNumber = request.PhoneNumber
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
         }
 
     }

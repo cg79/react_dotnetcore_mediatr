@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using cqrsTests.Tests.Mock;
 using cqrsVerticalSlices.Functionalities.User.Commands.Mutations;
+using cqrsVerticalSlices.Functionalities.User.Repository;
 using cqrsVerticalSlices.Models;
 using cqrsVerticalSlices.Mutations;
 using cqrsVerticalSlices.Queries;
@@ -18,55 +19,48 @@ namespace cqrsTests.Tests.User.Mutations
     public class CreateUserCommandHandlerTests
     {
         [Fact]
-        public async Task Handle_UniquePhoneNumber_AddsUserToDatabase()
+        public async Task Handle_ValidRequest_ReturnsUnit()
         {
             // Arrange
-            var userEntity = new UserEntity { Id = 1, FirstName = "a", LastName = "b", PhoneNumber = "c" };
-
-            var dbContextMock = new Mock<IDataContext>();
-            dbContextMock.Setup(m => m.Users)
-                .Returns(DbMocks.MockDbSet(userEntity));
-
-            var command = new CreateUserCommand
+            var userRepositoryMock = new Mock<IUserRepository>();
+            userRepositoryMock.Setup(repo => repo.CreateUserAsync(It.IsAny<CreateUserCommand>(), CancellationToken.None))
+                              .ReturnsAsync(Unit.Value);
+            var handler = new CreateUserCommandHandler(userRepositoryMock.Object);
+            var request = new CreateUserCommand
             {
                 FirstName = "John",
                 LastName = "Doe",
                 PhoneNumber = "1234567890"
             };
-            var handler = new CreateUserCommandHandler(dbContextMock.Object);
 
             // Act
-            await handler.Handle(command, CancellationToken.None);
+            var result = await handler.Handle(request, CancellationToken.None);
 
             // Assert
-            dbContextMock.Verify(c => c.SaveChangesAsync(CancellationToken.None), Times.Once);
-            Assert.Single(dbContextMock.Object.Users);
+            Assert.Equal(Unit.Value, result);
+            userRepositoryMock.Verify(repo => repo.CreateUserAsync(request, CancellationToken.None), Times.Once);
         }
 
         [Fact]
         public async Task Handle_DuplicatePhoneNumber_ThrowsException()
         {
-            var userEntity = new UserEntity { Id = 1, FirstName = "a", LastName = "b", PhoneNumber = "1234567890" };
-
-            var dbContextMock = new Mock<IDataContext>();
-            dbContextMock.Setup(m => m.Users)
-                .Returns(DbMocks.MockDbSet(userEntity));
-
-
-            var command = new CreateUserCommand
+            // Arrange
+            var userRepositoryMock = new Mock<IUserRepository>();
+            userRepositoryMock.Setup(repo => repo.CreateUserAsync(It.IsAny<CreateUserCommand>(), CancellationToken.None))
+                              .ThrowsAsync(new Exception("Contact already exists."));
+            var handler = new CreateUserCommandHandler(userRepositoryMock.Object);
+            var request = new CreateUserCommand
             {
                 FirstName = "John",
                 LastName = "Doe",
                 PhoneNumber = "1234567890"
             };
-            var handler = new CreateUserCommandHandler(dbContextMock.Object);
 
             // Act & Assert
-            var exception = await Assert.ThrowsAsync<Exception>(() => handler.Handle(command, CancellationToken.None));
-            Assert.Equal("Contact already exists.", exception.Message);
-            dbContextMock.Verify(c => c.SaveChangesAsync(CancellationToken.None), Times.Never);
+            await Assert.ThrowsAsync<Exception>(() => handler.Handle(request, CancellationToken.None));
+            userRepositoryMock.Verify(repo => repo.CreateUserAsync(request, CancellationToken.None), Times.Once);
         }
     }
 
-    
+
 }
