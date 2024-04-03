@@ -50,6 +50,5 @@ namespace cqrsTests.Tests.User.Controller
             Assert.Equal(204, result.StatusCode);
         }
 
-        // Add more tests for other actions similarly
     }
 }
