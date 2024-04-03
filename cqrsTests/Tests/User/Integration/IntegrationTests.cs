@@ -11,6 +11,7 @@ using CQRSVerticalSlices;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using Xunit;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace cqrsTests.Tests.User.Integration
 {
@@ -63,6 +64,36 @@ namespace cqrsTests.Tests.User.Integration
             Assert.True((bool)jsonResponse?.success);
             Assert.NotNull(createUserJsonResponse);
         }
+
+
+        [Fact]
+        public async Task UpdateExistingUser_ReturnsNoContent()
+        {
+            // Arrange
+            var phoneNumberGenerator = new PhoneNumberGenerator();
+            phoneNumber = phoneNumberGenerator.GeneratePhoneNumber();
+            var client = _factory.CreateClient();
+            dynamic? jsonResponse = await CreateUser(new CreateUserCommand { FirstName = "a", LastName = "b", PhoneNumber = phoneNumber });
+
+            dynamic? createdUserJsonResponse = await GetUserByPhoneNumber(phoneNumber);
+
+            var updatedUser = new UpdateUserCommand
+            {
+                Id = createdUserJsonResponse?.data.id,
+                FirstName = "UpdatedFirstName",
+                LastName = "UpdatedLastName",
+                PhoneNumber = "1234567890"
+            };
+
+            var content = new StringContent(JsonConvert.SerializeObject(updatedUser), Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await client.PutAsync($"/api/user/{createdUserJsonResponse?.data.id}", content);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
 
         [Fact]
         public async Task UpdateUser_ExistingUser_ReturnsNoContent()
