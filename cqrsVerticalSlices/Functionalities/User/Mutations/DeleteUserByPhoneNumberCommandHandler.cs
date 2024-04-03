@@ -1,5 +1,6 @@
 ﻿using System;
 using cqrsVerticalSlices.Functionalities.User.Commands.Mutations;
+using cqrsVerticalSlices.Functionalities.User.Repository;
 using cqrsVerticalSlices.Models;
 using CQRSVerticalSlices.Data;
 using MediatR;
@@ -9,24 +10,16 @@ namespace cqrsVerticalSlices.Mutations
 {
     public class DeleteUserByPhoneNumberCommandHandler : IRequestHandler<DeleteUserByPhoneCommand>
     {
-        private readonly DataContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public DeleteUserByPhoneNumberCommandHandler(DataContext context)
+        public DeleteUserByPhoneNumberCommandHandler(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public async Task<Unit> Handle(DeleteUserByPhoneCommand request, CancellationToken cancellationToken)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == request.PhoneNumber);
-            if (user != null)
-            {
-                _context.Users.Remove(user);
-            }
-
-            await _context.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
+            return await _userRepository.DeleteUserByPhoneAsync(request.PhoneNumber, cancellationToken);
         }
     }
 }

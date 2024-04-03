@@ -12,6 +12,8 @@ namespace cqrsVerticalSlices.Functionalities.User.Repository
         Task<UserEntity?> GetByPhoneNumberAsync(string phoneNumber);
         Task<UserResultDto> GetUsersAsync(int pageNumber, int pageSize, CancellationToken cancellationToken);
         Task<Unit> CreateUserAsync(CreateUserCommand request, CancellationToken cancellationToken);
-    }   
+        Task<Unit> DeleteUserByPhoneAsync(string phoneNumber, CancellationToken cancellationToken);
+        Task<Unit> UpdateUserAsync(int userId, string firstName, string lastName, string phoneNumber, CancellationToken cancellationToken);
+    }
 }
 

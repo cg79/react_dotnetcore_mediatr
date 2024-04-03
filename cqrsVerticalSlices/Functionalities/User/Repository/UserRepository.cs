@@ -70,6 +70,43 @@ namespace cqrsVerticalSlices.Functionalities.User.Repository
             return Unit.Value;
         }
 
+        public async Task<Unit> DeleteUserByPhoneAsync(string phoneNumber, CancellationToken cancellationToken)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber, cancellationToken);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+
+            return Unit.Value;
+        }
+
+        public async Task<Unit> UpdateUserAsync(int userId, string firstName, string lastName, string phoneNumber, CancellationToken cancellationToken)
+        {
+            var user = await _context.Users.FindAsync(userId);
+
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+
+            // Check if the new phone number is already associated with another user
+            var existingUserWithPhoneNumber = await _context.Users.FirstOrDefaultAsync(u => u.PhoneNumber == phoneNumber && u.Id != userId, cancellationToken);
+            if (existingUserWithPhoneNumber != null)
+            {
+                throw new Exception("Phone number is already associated with another user.");
+            }
+
+            user.FirstName = firstName;
+            user.LastName = lastName;
+            user.PhoneNumber = phoneNumber;
+
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Unit.Value;
+        }
+
     }
 }
 
