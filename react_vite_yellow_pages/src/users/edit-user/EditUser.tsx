@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import UserType from "../types/UserType";
-import userActions from "./actions";
+import UserType from "../../types/UserType";
+import userActions from "../actions/userActions";
 
 const EditUser = ({
   user,
@@ -24,12 +24,11 @@ const EditUser = ({
 
   const handleSave = async () => {
     setError(null);
+
     const response = await userActions.updateUser(editedUser);
-    // eslint-disable-next-line no-debugger
-    debugger;
+
     if (response.error) {
-      setError(response.error);
-      return;
+      return setError(response.error);
     }
     onSave(editedUser);
   };
@@ -73,6 +72,7 @@ const EditUser = ({
         <div className="ml5">
           <input
             id="phoneNumber"
+            name="phoneNumber"
             type="text"
             value={editedUser.phoneNumber}
             onChange={handleChange}

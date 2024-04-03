@@ -1,7 +1,7 @@
 // useUsers.js
 import { useEffect, useState } from "react";
 import UserType from "../../types/UserType";
-import userActions from "../../users/actions";
+import userActions from "../../users/actions/userActions";
 
 const useUsers = (currentPage = 1, pageSize = 2) => {
   const [users, setUsers] = useState<UserType[]>([]);

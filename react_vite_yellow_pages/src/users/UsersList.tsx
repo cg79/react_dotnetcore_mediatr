@@ -3,11 +3,11 @@
 import UserType from "src/types/UserType";
 import usePagination from "../hooks/usePagination/usePagination";
 import useUsers from "../hooks/useUsers/useUsers";
-import UserInformation from "./UserInformation";
+import UserInformation from "./user-info/UserInformation";
 import { useState } from "react";
 import Pagination from "../components/pagination/Pagination";
-import EditUser from "./EditUser";
-import CreateUserForm from "./CreateUserForm";
+import EditUser from "./edit-user/EditUser";
+import CreateUser from "./create-user/CreateUser";
 
 const UsersList = () => {
   const [editedUser, setEditedUser] = useState<UserType | null>(null);
@@ -68,13 +68,13 @@ const UsersList = () => {
       )}
 
       {creationMode && (
-        <CreateUserForm
+        <CreateUser
           onReload={() => {
             setCreationMode(false);
             setReload(new Date().toString());
           }}
           onCancel={() => setCreationMode(false)}
-        ></CreateUserForm>
+        ></CreateUser>
       )}
     </div>
   );

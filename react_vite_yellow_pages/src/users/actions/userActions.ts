@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { settings } from "../settings";
+import { settings } from "../../settings";
 import UserType from "src/types/UserType";
 
 class UserActions {

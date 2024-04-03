@@ -1,5 +1,5 @@
-import userActions from "./actions";
-import UserType from "../types/UserType";
+import userActions from "../actions/userActions";
+import UserType from "../../types/UserType";
 
 const UserInformation = ({
   user,

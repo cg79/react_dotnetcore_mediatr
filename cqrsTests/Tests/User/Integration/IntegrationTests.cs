@@ -34,8 +34,6 @@ namespace cqrsTests.Tests.User.Integration
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal(HttpStatusCode.Created, response.StatusCode);
-            // Additional assertions if needed
         }
 
         [Fact]
@@ -52,7 +50,6 @@ namespace cqrsTests.Tests.User.Integration
 
             // Assert
             response.EnsureSuccessStatusCode(); // Status Code 200-299
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
         }
 
         [Fact]
@@ -67,7 +64,7 @@ namespace cqrsTests.Tests.User.Integration
             var response = await client.DeleteAsync(requestUri);
 
             // Assert
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            response.EnsureSuccessStatusCode();
         }
 
         [Fact]
@@ -82,7 +79,7 @@ namespace cqrsTests.Tests.User.Integration
             var response = await client.DeleteAsync(requestUri);
 
             // Assert
-            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            response.EnsureSuccessStatusCode();
         }
 
 

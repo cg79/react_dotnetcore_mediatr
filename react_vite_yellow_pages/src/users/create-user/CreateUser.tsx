@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import userActions from "./actions";
+import { useState } from "react";
+import userActions from "../actions/userActions";
 
-const CreateUserForm = ({
+const CreateUser = ({
   onReload,
   onCancel,
 }: {
@@ -88,4 +88,4 @@ const CreateUserForm = ({
   );
 };
 
-export default CreateUserForm;
+export default CreateUser;

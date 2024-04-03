@@ -1,4 +1,3 @@
-// usePagination.js
 import { useState } from "react";
 
 const usePagination = (initialPage = 1, initialPageSize = 2) => {
