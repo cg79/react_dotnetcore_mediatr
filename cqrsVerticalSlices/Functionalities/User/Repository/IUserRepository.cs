@@ -6,6 +6,7 @@ namespace cqrsVerticalSlices.Functionalities.User.Repository
     public interface IUserRepository
     {
         Task<UserEntity?> GetByIdAsync(int id);
+        Task<UserEntity?> GetByPhoneNumberAsync(string phoneNumber);
     }
 }
 

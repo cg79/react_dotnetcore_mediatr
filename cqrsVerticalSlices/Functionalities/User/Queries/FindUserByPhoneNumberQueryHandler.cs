@@ -6,27 +6,23 @@ using System.Threading;
 using System.Threading.Tasks;
 using CQRSVerticalSlices.Data;
 using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
+using cqrsVerticalSlices.Functionalities.User.Repository;
 
 namespace cqrsVerticalSlices.Queries
 {
 
     public class FindUserByPhoneNumberQueryHandler : IRequestHandler<FindUserByPhoneNumberQuery, UserEntity>
     {
-        private readonly IDataContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public FindUserByPhoneNumberQueryHandler(IDataContext context)
+        public FindUserByPhoneNumberQueryHandler(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public  Task<UserEntity?> Handle(FindUserByPhoneNumberQuery request, CancellationToken cancellationToken)
         {
-            var response =   _context.Users.FirstOrDefault(u => u.PhoneNumber == request.PhoneNumber);
-            if (response == null)
-            {
-                return Task.FromResult<UserEntity?>(null);
-            }
-            return Task.FromResult<UserEntity?>(response);
+            return _userRepository.GetByPhoneNumberAsync(request.PhoneNumber);
         }
     }
 

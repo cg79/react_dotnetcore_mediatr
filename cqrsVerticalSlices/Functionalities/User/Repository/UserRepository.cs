@@ -20,6 +20,14 @@ namespace cqrsVerticalSlices.Functionalities.User.Repository
 
             return Task.FromResult<UserEntity?>(user);
         }
+
+        public Task<UserEntity?> GetByPhoneNumberAsync(string phoneNumber)
+        {
+            var user = _context.Users.FirstOrDefault(u => u.PhoneNumber == phoneNumber);
+
+            return Task.FromResult<UserEntity?>(user);
+        }
+
     }
 }
 

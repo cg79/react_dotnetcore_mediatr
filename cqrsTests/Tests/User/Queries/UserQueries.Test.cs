@@ -78,11 +78,15 @@ namespace cqrsTests.Tests.User.Queries
             var query = new FindUserByPhoneNumberQuery { PhoneNumber = "222" };
             var userEntity = new UserEntity { Id = 1, FirstName = "a", LastName = "b", PhoneNumber = "222" };
 
-            var dbContextMock = new Mock<IDataContext>();
-            dbContextMock.Setup(m => m.Users)
-                .Returns(DbMocks.MockDbSet(userEntity));
+            //var dbContextMock = new Mock<IDataContext>();
+            //dbContextMock.Setup(m => m.Users)
+            //    .Returns(DbMocks.MockDbSet(userEntity));
 
-            var handler = new FindUserByPhoneNumberQueryHandler(dbContextMock.Object);
+            var mockUserRepository = new Mock<IUserRepository>();
+            mockUserRepository.Setup(r => r.GetByPhoneNumberAsync(It.IsAny<string>()))
+                      .Returns(Task.FromResult<UserEntity?>(userEntity));
+
+            var handler = new FindUserByPhoneNumberQueryHandler(mockUserRepository.Object);
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);
@@ -99,11 +103,11 @@ namespace cqrsTests.Tests.User.Queries
             var query = new FindUserByPhoneNumberQuery { PhoneNumber = "not_exists" };
             var userEntity = new UserEntity { Id = 1, FirstName = "a", LastName = "b", PhoneNumber = "222" };
 
-            var dbContextMock = new Mock<IDataContext>();
-            dbContextMock.Setup(m => m.Users)
-                .Returns(DbMocks.MockDbSet(userEntity));
+            var mockUserRepository = new Mock<IUserRepository>();
+            mockUserRepository.Setup(r => r.GetByPhoneNumberAsync(It.IsAny<string>()))
+                      .Returns(Task.FromResult<UserEntity?>(null));
 
-            var handler = new FindUserByPhoneNumberQueryHandler(dbContextMock.Object);
+            var handler = new FindUserByPhoneNumberQueryHandler(mockUserRepository.Object);
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);
