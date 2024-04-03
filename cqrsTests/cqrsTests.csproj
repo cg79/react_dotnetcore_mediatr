@@ -39,6 +39,7 @@
     <None Remove="Tests\User\Mutations\" />
     <None Remove="Tests\User\Controller\" />
     <None Remove="Tests\User\Integration\" />
+    <None Remove="Tests\User\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests\" />
@@ -49,5 +50,6 @@
     <Folder Include="Tests\User\Mutations\" />
     <Folder Include="Tests\User\Controller\" />
     <Folder Include="Tests\User\Integration\" />
+    <Folder Include="Tests\User\Helpers\" />
   </ItemGroup>
 </Project>

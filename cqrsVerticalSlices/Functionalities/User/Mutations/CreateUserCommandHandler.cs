@@ -17,7 +17,6 @@ namespace cqrsVerticalSlices.Mutations
 
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            _context.EnumerateTables();
             if (_context.Users.Any(u => u.PhoneNumber == request.PhoneNumber))
             {
                 throw new Exception("Contact already exists.");
@@ -30,10 +29,10 @@ namespace cqrsVerticalSlices.Mutations
                     PhoneNumber = request.PhoneNumber
                 };
 
-                _context.Users.Add(user);
-                await _context.SaveChangesAsync(cancellationToken);
+            _context.Users.Add(user);
+            var id =  await _context.SaveChangesAsync(cancellationToken);
 
-                return Unit.Value;
+            return Unit.Value;
             
         }
     }

@@ -2,7 +2,9 @@
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using cqrsTests.Tests.User.Helpers;
 using cqrsVerticalSlices.Functionalities.User.Commands.Mutations;
+using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
 using cqrsVerticalSlices.Models;
 using cqrsVerticalSlices.Queries;
 using CQRSVerticalSlices;
@@ -12,33 +14,60 @@ using Xunit;
 
 namespace cqrsTests.Tests.User.Integration
 {
-    public class UserControllerIntegrationTests1 : IClassFixture<WebApplicationFactory<Startup>>
+    public class UserControllerIntegrationTests : IClassFixture<WebApplicationFactory<Startup>>
     {
         private readonly WebApplicationFactory<Startup> _factory;
+        private string phoneNumber = "";
 
-        public UserControllerIntegrationTests1(WebApplicationFactory<Startup> factory)
+        public UserControllerIntegrationTests(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
+        }
+
+        private async Task<dynamic?> GetUserByPhoneNumber(string phoneNumber)
+        {
+            var client = _factory.CreateClient();
+
+            var response = await client.GetAsync($"/api/user/phoneNumber?phoneNumber={phoneNumber}");
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject(responseContent) as dynamic;
+            return jsonResponse;
+        }
+
+        private async Task<dynamic?> CreateUser(CreateUserCommand command)
+        {
+            
+            var client = _factory.CreateClient();
+            var content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync("/api/user", content);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject(responseContent) as dynamic;
+
+            return jsonResponse;
         }
 
         [Fact]
         public async Task CreateUser_ReturnsCreatedAtAction()
         {
-            // Arrange
-            var client = _factory.CreateClient();
-            var command = new CreateUserCommand { FirstName = "a", LastName = "b", PhoneNumber = "1234567891" };
-            var content = new StringContent(JsonConvert.SerializeObject(command), Encoding.UTF8, "application/json");
+            var phoneNumberGenerator = new PhoneNumberGenerator();
+            phoneNumber = phoneNumberGenerator.GeneratePhoneNumber();
 
-            // Act
-            var response = await client.PostAsync("/api/user", content);
+            dynamic? jsonResponse = await CreateUser(new CreateUserCommand { FirstName = "a", LastName = "b", PhoneNumber = phoneNumber });
+
+            dynamic? createUserJsonResponse = await GetUserByPhoneNumber(phoneNumber);
 
             // Assert
-            response.EnsureSuccessStatusCode(); // Status Code 200-299
+            Assert.True((bool)jsonResponse?.success);
+            Assert.NotNull(createUserJsonResponse);
         }
 
         [Fact]
         public async Task UpdateUser_ExistingUser_ReturnsNoContent()
         {
+            var user = await GetUserByPhoneNumber(phoneNumber);
             // Arrange
             var client = _factory.CreateClient();
             var id = 2; 
@@ -49,6 +78,9 @@ namespace cqrsTests.Tests.User.Integration
             var response = await client.PutAsync($"/api/user/{id}", content);
 
             // Assert
+            // Read response content
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var jsonResponse = JsonConvert.DeserializeObject(responseContent) as dynamic;
             response.EnsureSuccessStatusCode(); // Status Code 200-299
         }
 

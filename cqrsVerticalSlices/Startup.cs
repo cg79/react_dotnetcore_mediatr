@@ -1,4 +1,5 @@
 using cqrsVerticalSlices.Filter;
+using cqrsVerticalSlices.Functionalities.User.Repository;
 using cqrsVerticalSlices.MIddleware;
 using CQRSVerticalSlices.Data;
 using CQRSVerticalSlices.Helpers;
@@ -31,6 +32,7 @@ namespace CQRSVerticalSlices
 
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IDataContext, DataContext>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddCors();
 

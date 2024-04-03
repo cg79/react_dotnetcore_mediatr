@@ -1,6 +1,7 @@
 ﻿using cqrsTests.Mocks;
 using cqrsTests.Tests.Mock;
 using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
+using cqrsVerticalSlices.Functionalities.User.Repository;
 using cqrsVerticalSlices.Models;
 using cqrsVerticalSlices.Queries;
 using CQRSVerticalSlices.Data;
@@ -28,7 +29,14 @@ namespace cqrsTests.Tests.User.Queries
             dbContextMock.Setup(m => m.Users)
                 .Returns(DbMocks.MockDbSet(userEntity));
 
-            var handler = new FindUserByIdQueryHandler(dbContextMock.Object);
+            var expectedUser = new UserEntity { Id = 1, FirstName = "John", LastName = "Doe", PhoneNumber="111" };
+
+            var mockUserRepository = new Mock<IUserRepository>();
+            mockUserRepository.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                              .ReturnsAsync(expectedUser);
+
+
+            var handler = new FindUserByIdQueryHandler(mockUserRepository.Object);
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);
@@ -49,7 +57,11 @@ namespace cqrsTests.Tests.User.Queries
             dbContextMock.Setup(m => m.Users)
                 .Returns(DbMocks.MockDbSet(userEntity));
 
-            var handler = new FindUserByIdQueryHandler(dbContextMock.Object);
+            var mockUserRepository = new Mock<IUserRepository>();
+            mockUserRepository.Setup(r => r.GetByIdAsync(It.IsAny<int>()))
+                      .Returns(Task.FromResult<UserEntity?>(null));
+
+            var handler = new FindUserByIdQueryHandler(mockUserRepository.Object);
 
             // Act
             var result = await handler.Handle(query, CancellationToken.None);

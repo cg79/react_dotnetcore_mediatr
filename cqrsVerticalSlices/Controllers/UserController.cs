@@ -53,8 +53,8 @@ public class UserController : ControllerBase
 
 
 
-    // GET api/user/5
-    [HttpGet("{id}")]
+    // GET api/user/id/5
+    [HttpGet("id/{id}")]
     public async Task<IActionResult> GetUser(int id)
     {
         var user = await _mediator.Send(new FindUserByIdQuery { Id = id });
@@ -67,8 +67,8 @@ public class UserController : ControllerBase
         return Ok(user);
     }
 
-    // GET api/user?phoneNumber=1234567890
-    [HttpGet]
+    // GET api/user/phoneNumber?phoneNumber=1234567890
+    [HttpGet("phoneNumber")]
     public async Task<IActionResult> GetUserByPhoneNumber([FromQuery] string phoneNumber)
     {
         var user = await _mediator.Send(new FindUserByPhoneNumberQuery { PhoneNumber = phoneNumber });

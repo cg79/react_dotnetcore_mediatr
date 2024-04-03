@@ -6,27 +6,23 @@ using System.Threading;
 using System.Threading.Tasks;
 using CQRSVerticalSlices.Data;
 using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
+using cqrsVerticalSlices.Functionalities.User.Repository;
 
 namespace cqrsVerticalSlices.Queries
 {
 
     public class FindUserByIdQueryHandler : IRequestHandler<FindUserByIdQuery, UserEntity>
     {
-        private readonly IDataContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public FindUserByIdQueryHandler(IDataContext context)
+        public FindUserByIdQueryHandler(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         public Task<UserEntity?> Handle(FindUserByIdQuery request, CancellationToken cancellationToken)
         {
-            var response =  _context.Users.FirstOrDefault(u => u.Id == request.Id);
-            if (response == null)
-            {
-                return Task.FromResult<UserEntity?>(null);
-            }
-            return Task.FromResult<UserEntity?>(response);
+            return _userRepository.GetByIdAsync(request.Id);
         }
     }
 
