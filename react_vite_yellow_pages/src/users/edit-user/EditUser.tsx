@@ -4,11 +4,11 @@ import userActions from "../actions/userActions";
 
 const EditUser = ({
   user,
-  onSave,
+  onUserUpdated,
   onCancel,
 }: {
   user: UserType;
-  onSave: (user: UserType) => void;
+  onUserUpdated: (user: UserType) => void;
   onCancel: () => void;
 }) => {
   const [editedUser, setEditedUser] = useState(user);
@@ -30,7 +30,7 @@ const EditUser = ({
     if (response.error) {
       return setError(response.error);
     }
-    onSave(editedUser);
+    onUserUpdated(editedUser);
   };
 
   return (

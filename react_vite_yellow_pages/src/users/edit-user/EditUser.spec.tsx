@@ -1,4 +1,4 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, act } from "@testing-library/react";
 import EditUser from "./EditUser";
 import UserType from "../../types/UserType";
 
@@ -23,7 +23,11 @@ describe("EditUser component", () => {
 
   test("renders edit user form", () => {
     const { getByLabelText, getByText } = render(
-      <EditUser user={user} onSave={onSaveMock} onCancel={onCancelMock} />
+      <EditUser
+        user={user}
+        onUserUpdated={onSaveMock}
+        onCancel={onCancelMock}
+      />
     );
 
     expect(getByLabelText(/First Name:/i)).toBeInTheDocument();
@@ -35,7 +39,11 @@ describe("EditUser component", () => {
 
   test("handles input change", () => {
     const { getByLabelText } = render(
-      <EditUser user={user} onSave={onSaveMock} onCancel={onCancelMock} />
+      <EditUser
+        user={user}
+        onUserUpdated={onSaveMock}
+        onCancel={onCancelMock}
+      />
     );
 
     const firstNameInput = getByLabelText(/First Name:/i) as HTMLInputElement;
@@ -54,26 +62,31 @@ describe("EditUser component", () => {
   });
 
   test("handles save button click", async () => {
-    const onSaveMock1 = jest.fn();
-    let called = false;
-    userActions.updateUser = jest.fn().mockImplementationOnce(() => {
-      called = true;
-      return Promise.resolve({ success: true });
-    });
+    const onSaveMock = jest.fn().mockResolvedValueOnce({});
+    userActions.updateUser = onSaveMock;
 
     const { getByText } = render(
-      <EditUser user={user} onSave={onSaveMock1} onCancel={onCancelMock} />
+      <EditUser
+        user={user}
+        onUserUpdated={onSaveMock}
+        onCancel={onCancelMock}
+      />
     );
 
-    fireEvent.click(getByText(/Save/i));
+    act(() => {
+      fireEvent.click(getByText(/Save/i));
+    });
 
-    expect(called).toEqual(true);
-    // expect(onSaveMock1).toHaveBeenCalled();
+    expect(onSaveMock).toHaveBeenCalled();
   });
 
   test("handles cancel button click", () => {
     const { getByText } = render(
-      <EditUser user={user} onSave={onSaveMock} onCancel={onCancelMock} />
+      <EditUser
+        user={user}
+        onUserUpdated={onSaveMock}
+        onCancel={onCancelMock}
+      />
     );
 
     fireEvent.click(getByText(/Cancel/i));

@@ -1,5 +1,3 @@
-// import { useState, useEffect } from "react";
-
 import UserType from "src/types/UserType";
 import usePagination from "../hooks/usePagination/usePagination";
 import useUsers from "../hooks/useUsers/useUsers";
@@ -42,7 +40,7 @@ const UsersList = () => {
             <EditUser
               key={user.id}
               user={user}
-              onSave={onUserUpdated}
+              onUserUpdated={onUserUpdated}
               onCancel={() => setEditedUser(null)}
             />
           ) : (

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { debounce } from "lodash";
+// import { debounce, throttle } from "lodash";
 import UserType from "src/types/UserType";
 import userActions from "../actions/userActions";
+import useDebounce from "../../hooks/useDebounce/useDebounce";
 
 const UserSearch = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -10,8 +11,6 @@ const UserSearch = () => {
   const triggerSearchUser = async (phoneNumber: string) => {
     try {
       const response = await userActions.searchUser(phoneNumber);
-      // eslint-disable-next-line no-debugger
-      debugger;
       if (!response || !response.id) {
         return setUser(null);
       }
@@ -22,7 +21,7 @@ const UserSearch = () => {
   };
 
   // Debounce the search function
-  const debouncedSearch = debounce(triggerSearchUser, 500);
+  const debouncedSearch = useDebounce(triggerSearchUser, 500);
 
   const handlePhoneNumberChange = (e) => {
     const phoneNumber = e.target.value;

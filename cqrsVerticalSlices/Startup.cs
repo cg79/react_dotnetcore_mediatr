@@ -1,15 +1,9 @@
 using cqrsVerticalSlices.Filter;
 using cqrsVerticalSlices.Functionalities.User.Repository;
-using cqrsVerticalSlices.MIddleware;
 using CQRSVerticalSlices.Data;
 using CQRSVerticalSlices.Helpers;
 using MediatR;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 
 namespace CQRSVerticalSlices
 {
@@ -27,7 +21,6 @@ namespace CQRSVerticalSlices
         {
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddScoped<ApiResponseMiddleware>();
             services.AddScoped<CaptureResponseActionFilter>();
 
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
@@ -35,9 +28,6 @@ namespace CQRSVerticalSlices
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddCors();
-
-            //services.AddControllers();
-            
 
             services.AddMediatR(typeof(Startup).Assembly);
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
@@ -54,8 +44,6 @@ namespace CQRSVerticalSlices
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseMiddleware<ApiResponseMiddleware>();
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
             if (env.IsDevelopment())

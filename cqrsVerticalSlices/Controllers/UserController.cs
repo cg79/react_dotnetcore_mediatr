@@ -1,9 +1,7 @@
 ﻿using cqrsVerticalSlices.Functionalities.User.Commands.Mutations;
 using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
-using cqrsVerticalSlices.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 [ApiController]
 [Route("api/[controller]")]

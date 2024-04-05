@@ -36,7 +36,6 @@
     <None Remove="Functionalities\User\Commands\Mutations\" />
     <None Remove="Functionalities\User\Commands\Queries\" />
     <None Remove="Functionalities\User\Dto\" />
-    <None Remove="MIddleware\" />
     <None Remove="Filter\" />
     <None Remove="Functionalities\User\Repository\" />
   </ItemGroup>
@@ -50,7 +49,6 @@
     <Folder Include="Functionalities\User\Commands\Mutations\" />
     <Folder Include="Functionalities\User\Commands\Queries\" />
     <Folder Include="Functionalities\User\Dto\" />
-    <Folder Include="MIddleware\" />
     <Folder Include="Filter\" />
     <Folder Include="Functionalities\User\Repository\" />
   </ItemGroup>
