@@ -1,88 +1,76 @@
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
-import userActions from "../actions/userActions";
 import UserSearch from "./UserSearch";
+import userActions from "../actions/userActions";
 
 jest.mock("../actions/userActions");
 
-describe("UserSearch", () => {
+describe("UserSearch Component", () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.clearAllMocks();
+    jest.useRealTimers();
   });
 
-  test("renders UserSearch component", () => {
-    const { getByLabelText } = render(<UserSearch />);
-    const inputElement = getByLabelText("Search by Phone Number:");
-    expect(inputElement).toBeInTheDocument();
+  it("should render the input field", () => {
+    const { getByTestId } = render(<UserSearch />);
+    expect(getByTestId("phone-input")).toBeInTheDocument();
   });
 
-  test("triggers search when phone number changes", async () => {
-    const searchUserMock = jest.fn();
+  it("should trigger searchUser function on phone number change", () => {
+    const { getByTestId } = render(<UserSearch />);
+    const inputElement = getByTestId("phone-input");
+    fireEvent.change(inputElement, { target: { value: "123456789" } });
+    jest.runAllTimers();
+    expect(userActions.searchUser).toHaveBeenCalledWith("123456789");
+  });
+
+  it("should not trigger searchUser function on rapid phone number changes", () => {
+    const { getByTestId } = render(<UserSearch />);
+    const inputElement = getByTestId("phone-input");
+    fireEvent.change(inputElement, { target: { value: "123" } });
+    fireEvent.change(inputElement, { target: { value: "1234" } });
+    jest.runAllTimers();
+    expect(userActions.searchUser).toHaveBeenCalledTimes(1);
+    expect(userActions.searchUser).toHaveBeenCalledWith("1234");
+  });
+
+  it("should clear user details when search returns no response or no id", async () => {
+    userActions.searchUser = jest.fn().mockResolvedValueOnce(null);
+    const { getByTestId, queryByText } = render(<UserSearch />);
+    const inputElement = getByTestId("phone-input");
+    fireEvent.change(inputElement, { target: { value: "123456789" } });
+    await waitFor(() => {
+      expect(queryByText("User Details:")).toBeNull();
+    });
+  });
+
+  it("should display user details when search returns response with id", async () => {
     userActions.searchUser = jest.fn().mockResolvedValueOnce({
       id: 1,
       firstName: "John",
       lastName: "Doe",
-      phoneNumber: "1234567890",
+      phoneNumber: "123456789",
     });
-    const { getByLabelText, findByText } = render(<UserSearch />);
-    const inputElement = getByLabelText("Search by Phone Number:");
-
-    fireEvent.change(inputElement, { target: { value: "1234567890" } });
-
-    expect(searchUserMock).toHaveBeenCalledTimes(0);
-
-    jest.advanceTimersByTime(500);
-    await waitFor(() =>
-      expect(userActions.searchUser).toHaveBeenCalledTimes(1)
-    );
-
-    // Assert user details are rendered
-    expect(await findByText("John")).toBeInTheDocument();
-    expect(await findByText("Doe")).toBeInTheDocument();
-    expect(await findByText("1234567890")).toBeInTheDocument();
+    const { getByTestId, getByText } = render(<UserSearch />);
+    const inputElement = getByTestId("phone-input");
+    fireEvent.change(inputElement, { target: { value: "123456789" } });
+    await waitFor(() => {
+      expect(getByText("User Details:")).toBeInTheDocument();
+      expect(getByText("First Name: John")).toBeInTheDocument();
+      expect(getByText("Last Name: Doe")).toBeInTheDocument();
+      expect(getByText("Phone Number: 123456789")).toBeInTheDocument();
+    });
   });
 
-  test("clears user details when no user found", async () => {
-    userActions.searchUser = jest.fn().mockResolvedValueOnce(null);
-    const { getByLabelText, queryByText } = render(<UserSearch />);
-    const inputElement = getByLabelText("Search by Phone Number:");
-
-    fireEvent.change(inputElement, { target: { value: "9876543210" } });
-
-    jest.advanceTimersByTime(500);
-    await waitFor(() =>
-      expect(userActions.searchUser).toHaveBeenCalledTimes(1)
-    );
-
-    // Assert user details are not rendered
-    expect(queryByText("John")).not.toBeInTheDocument();
-    expect(queryByText("Doe")).not.toBeInTheDocument();
-    expect(queryByText("1234567890")).not.toBeInTheDocument();
-  });
-
-  test("handles debounce correctly", async () => {
-    const debouncedFn = jest.fn();
-    const triggerSearchUserMock = jest.fn(() => debouncedFn);
-    userActions.searchUser = jest
-      .fn()
-      .mockImplementation(triggerSearchUserMock);
-    const { getByLabelText } = render(<UserSearch />);
-    const inputElement = getByLabelText("Search by Phone Number:");
-
-    fireEvent.change(inputElement, { target: { value: "1234567890" } });
-
-    // Fast-forward 250ms
-    jest.advanceTimersByTime(250);
-    fireEvent.change(inputElement, { target: { value: "9876543210" } });
-
-    // Fast-forward remaining debounce delay
-    jest.advanceTimersByTime(250);
-
-    expect(triggerSearchUserMock).toHaveBeenCalledTimes(2);
-    expect(debouncedFn).toHaveBeenCalledTimes(1);
+  it("should handle errors when searchUser function throws an error", async () => {
+    userActions.searchUser = jest.fn().mockRejectedValueOnce("Error");
+    const { getByTestId, getByText } = render(<UserSearch />);
+    const inputElement = getByTestId("phone-input");
+    fireEvent.change(inputElement, { target: { value: "123456789" } });
+    await waitFor(() => {
+      expect(getByText("Error searching user")).toBeInTheDocument();
+    });
   });
 });

@@ -7,23 +7,27 @@ import useDebounce from "../../hooks/useDebounce/useDebounce";
 const UserSearch = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [user, setUser] = useState<UserType | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const triggerSearchUser = async (phoneNumber: string) => {
     try {
+      setError(null);
       const response = await userActions.searchUser(phoneNumber);
+      // eslint-disable-next-line no-debugger
+      debugger;
       if (!response || !response.id) {
         return setUser(null);
       }
       setUser(response);
     } catch (error) {
-      console.error("Error searching user:", error);
+      setError("Error searching user");
     }
   };
 
   // Debounce the search function
   const debouncedSearch = useDebounce(triggerSearchUser, 500);
 
-  const handlePhoneNumberChange = (e) => {
+  const handlePhoneNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const phoneNumber = e.target.value;
     setPhoneNumber(phoneNumber);
     debouncedSearch(phoneNumber);
@@ -38,7 +42,9 @@ const UserSearch = () => {
         className="text-input"
         value={phoneNumber}
         onChange={handlePhoneNumberChange}
+        data-testid="phone-input"
       />
+      {error && <p>{error}</p>}
       {user && (
         <div>
           <h2>User Details:</h2>

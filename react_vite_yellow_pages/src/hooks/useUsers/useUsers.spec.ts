@@ -1,34 +1,67 @@
-import { renderHook } from "@testing-library/react";
-import axios from "axios";
+import { renderHook, act } from "@testing-library/react-hooks";
 import useUsers from "./useUsers";
+import userActions from "../../users/actions/userActions";
 
-jest.mock("axios");
+jest.mock("../../users/actions/userActions");
 
 describe("useUsers", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it("should fetch users successfully", async () => {
-    axios.get = jest.fn().mockResolvedValue({
-      data: [
-        { id: 1, name: "John" },
-        { id: 2, name: "Jane" },
-      ],
-    });
-    const { result } = renderHook(() => useUsers());
+  it("should fetch users and set state correctly", async () => {
+    const mockUsers = [
+      { id: 1, name: "User 1" },
+      { id: 2, name: "User 2" },
+    ];
+    const mockTotalCount = 2;
+    userActions.getUsers = jest
+      .fn()
+      .mockResolvedValueOnce({ users: mockUsers, totalCount: mockTotalCount });
+
+    const { result, waitForNextUpdate } = renderHook(() => useUsers());
 
     expect(result.current.loading).toBe(true);
+    expect(result.current.error).toBeNull();
+    expect(result.current.users).toEqual([]);
+    expect(result.current.totalCount).toBe(0);
+
+    await waitForNextUpdate();
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBeNull();
+    expect(result.current.users).toEqual(mockUsers);
+    expect(result.current.totalCount).toBe(mockTotalCount);
   });
 
-  it("should handle error when fetching users", async () => {
-    const errorMessage = "Failed to fetch users";
-    axios.get = jest.fn().mockRejectedValueOnce(new Error(errorMessage));
+  it("should handle error when fetching users fails", async () => {
+    const mockError = "Failed to fetch users";
+    userActions.getUsers = jest.fn().mockRejectedValueOnce(mockError);
 
-    const hookResult = renderHook(() => useUsers());
+    const { result, waitForNextUpdate } = renderHook(() => useUsers());
 
-    expect(hookResult?.result.current.users).toEqual([]);
-    expect(hookResult?.result.current.loading).toBe(true);
-    expect(hookResult?.result.current.error).toBe(null);
+    expect(result.current.loading).toBe(true);
+    expect(result.current.error).toBeNull();
+    expect(result.current.users).toEqual([]);
+    expect(result.current.totalCount).toBe(0);
+
+    await waitForNextUpdate();
+
+    expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBe(mockError);
+    expect(result.current.users).toEqual([]);
+    expect(result.current.totalCount).toBe(0);
+  });
+
+  it("should set reload flag when setReload function is called", async () => {
+    const { result } = renderHook(() => useUsers());
+
+    expect(result.current.reload).toBe("");
+
+    act(() => {
+      result.current.setReload("reload");
+    });
+
+    expect(result.current.reload).toBe("reload");
   });
 });

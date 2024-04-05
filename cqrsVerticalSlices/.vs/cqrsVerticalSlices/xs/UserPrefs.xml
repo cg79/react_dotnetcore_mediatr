@@ -1,94 +1,102 @@
 ﻿<Properties StartupConfiguration="{3D7AB5FC-7716-48BB-B05F-488D161523FB}|https">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Startup.cs">
+    <Files>
+      <File FileName="../cqrsTests/Tests/User/Integration/IntegrationTests.cs" Line="26" Column="10" />
+      <File FileName="Controllers/UserController.cs" Line="5" Column="1" />
+      <File FileName="Filter/CaptureResponseActionFilter.cs" Line="50" Column="21" />
+      <File FileName="Functionalities/User/Queries/FindUserByPhoneNumberQueryHandler.cs" />
+      <File FileName="Functionalities/User/Commands/Mutations/CreateUserCommand.cs" />
+      <File FileName="../cqrsTests/Tests/User/Helpers/PhoneNumberGenerator.cs" />
+      <File FileName="Functionalities/User/Commands/Queries/FindUserByIdQuery.cs" />
+      <File FileName="Functionalities/User/Queries/FindUserByIdQueryHandler.cs" />
+      <File FileName="Functionalities/User/Repository/IUserRepository.cs" Line="15" Column="20" />
+      <File FileName="Functionalities/User/Repository/UserRepository.cs" Line="73" Column="33" />
+      <File FileName="../cqrsTests/Tests/User/Queries/UserQueries.Test.cs" />
+      <File FileName="Functionalities/User/Commands/Queries/GetUsersQuery.cs" />
+      <File FileName="Functionalities/User/Queries/GetUsersQueryHandler.cs" />
+      <File FileName="../cqrsTests/Tests/User/Mutations/UserMutations.Test.cs" />
+      <File FileName="Functionalities/User/Mutations/DeleteUserByPhoneNumberCommandHandler.cs" Line="5" Column="1" />
+      <File FileName="Functionalities/User/Mutations/UpdateUserCommandHandler.cs" />
+      <File FileName="../cqrsTests/Tests/User/Controller/UserController.Test.cs" />
+      <File FileName="../cqrsTests/Tests/User/Repository/UserRepository.Test.cs" />
+      <File FileName="../cqrsTests/Tests/User/Repository/DbSetMock.cs" />
+      <File FileName="Program.cs" Line="2" Column="1" />
+      <File FileName="Data/DataContext.cs" Line="16" Column="45" />
+      <File FileName="Helpers/LoggingBehavior.cs" Line="1" Column="1" />
+      <File FileName="Helpers/MigrationHelper.cs" Line="1" Column="1" />
+      <File FileName="Models/UserEntity.cs" Line="1" Column="1" />
+      <File FileName="Properties/launchSettings.json" Line="1" Column="1" />
+      <File FileName="appsettings.json" Line="1" Column="1" />
+      <File FileName="Startup.cs" Line="3" Column="26" />
+      <File FileName="Functionalities/User/Mutations/DeleteUserCommandHandler.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="cqrsVerticalSlices">
+            <Node name="cqrsTests">
+              <Node name="Tests" expanded="True">
+                <Node name="User" expanded="True">
+                  <Node name="Integration" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+            <Node name="cqrsVerticalSlices" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True" />
+              <Node name="Filter" expanded="True" />
+              <Node name="Functionalities" expanded="True">
+                <Node name="User" expanded="True">
+                  <Node name="Mutations" expanded="True" />
+                  <Node name="Repository" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Helpers" expanded="True" />
+              <Node name="Models" expanded="True" />
+              <Node name="Properties" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.UnitTesting.TestPad">
+        <State name="__root__">
+          <Node name="cqrsVerticalSlices">
+            <Node name="cqrsTests">
+              <Node name="cqrsTests.Tests.User.Integration">
+                <Node name="UserControllerIntegrationTests" expanded="True">
+                  <Node name="UpdateUser_ExistingUser_ReturnsNoContent - edee0882-94ea-b003-2bd8-f3235cf11961" selected="True" />
+                </Node>
+              </Node>
+              <Node name="cqrsTests.Tests.User.Mutations">
+                <Node name="CreateUserCommandHandlerTests" expanded="True" />
+              </Node>
+              <Node name="cqrsTests.Tests.User.Queries">
+                <Node name="UserQueries" expanded="True" />
+              </Node>
+              <Node name="cqrsTests.Tests.User.Repository.YourNamespace.Tests.Functionalities.User.Repository">
+                <Node name="UserRepositoryTests" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Controllers/WeatherForecastController.cs" relfile="Controllers/WeatherForecastController.cs" line="53" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/UnitTest1.cs" line="28" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/UnitTest1.cs" line="55" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Migrations/20210828175305_InitialCreate.cs" relfile="Migrations/20210828175305_InitialCreate.cs" line="10" column="1" />
-      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Helpers/LoggingBehavior.cs" relfile="Helpers/LoggingBehavior.cs" line="33" column="1" />
-      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="50" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/MIddleware/ApiResponseMiddleware.cs" relfile="MIddleware/ApiResponseMiddleware.cs" line="21" column="1" />
-      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="60" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/Tests/User/Integration/IntegrationTests.cs" line="34" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/Tests/User/Integration/IntegrationTests.cs" line="103" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/Tests/User/Integration/IntegrationTests.cs" line="65" column="1" />
-      <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsVerticalSlices/Controllers/UserController.cs" relfile="Controllers/UserController.cs" line="62" column="1" />
       <Breakpoint file="/Users/claudiugombos/work/_asp.netcore/cqrs_verticalslices/cqrsTests/Tests/User/Integration/IntegrationTests.cs" line="94" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../cqrsTests/Tests/User/Integration/IntegrationTests.cs">
-    <Files>
-      <File FileName="../cqrsTests/Tests/User/Integration/IntegrationTests.cs" Line="26" Column="10" />
-      <File FileName="Controllers/UserController.cs" Line="75" Column="1" />
-      <File FileName="Filter/CaptureResponseActionFilter.cs" Line="50" Column="21" />
-      <File FileName="Functionalities/User/Queries/FindUserByPhoneNumberQueryHandler.cs" Line="25" Column="57" />
-      <File FileName="Functionalities/User/Commands/Mutations/CreateUserCommand.cs" Line="1" Column="1" />
-      <File FileName="../cqrsTests/Tests/User/Helpers/PhoneNumberGenerator.cs" Line="15" Column="33" />
-      <File FileName="Functionalities/User/Commands/Queries/FindUserByIdQuery.cs" Line="1" Column="1" />
-      <File FileName="Functionalities/User/Queries/FindUserByIdQueryHandler.cs" Line="18" Column="71" />
-      <File FileName="Functionalities/User/Repository/IUserRepository.cs" Line="17" Column="6" />
-      <File FileName="Functionalities/User/Repository/UserRepository.cs" Line="97" Column="14" />
-      <File FileName="../cqrsTests/Tests/User/Queries/UserQueries.Test.cs" Line="108" Column="68" />
-      <File FileName="Functionalities/User/Commands/Queries/GetUsersQuery.cs" Line="1" Column="1" />
-      <File FileName="Functionalities/User/Queries/GetUsersQueryHandler.cs" Line="24" Column="10" />
-      <File FileName="../cqrsTests/Tests/User/Mutations/UserMutations.Test.cs" Line="63" Column="6" />
-      <File FileName="Functionalities/User/Mutations/DeleteUserByPhoneNumberCommandHandler.cs" Line="24" Column="6" />
-      <File FileName="Functionalities/User/Mutations/UpdateUserCommandHandler.cs" Line="22" Column="10" />
-      <File FileName="../cqrsTests/Tests/User/Controller/UserController.Test.cs" Line="53" Column="6" />
-      <File FileName="../cqrsTests/Tests/User/Repository/UserRepository.Test.cs" Line="15" Column="42" />
-      <File FileName="../cqrsTests/Tests/User/Repository/DbSetMock.cs" Line="73" Column="27" />
-    </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="cqrsVerticalSlices" selected="True">
-            <Node name="cqrsTests">
-              <Node name="Tests">
-                <Node name="User">
-                  <Node name="Controller" expanded="True" />
-                  <Node name="Helpers" expanded="True" />
-                  <Node name="Mutations" expanded="True" />
-                  <Node name="Queries" expanded="True" />
-                  <Node name="Repository" expanded="True" />
-                </Node>
-              </Node>
-            </Node>
-            <Node name="cqrsVerticalSlices">
-              <Node name="Dependencies" expanded="True">
-                <Node name="FrameworkReferences" expanded="True" />
-              </Node>
-              <Node name="Controllers" expanded="True" />
-              <Node name="Filter" expanded="True" />
-              <Node name="Functionalities" expanded="True">
-                <Node name="User" expanded="True">
-                  <Node name="Commands" expanded="True">
-                    <Node name="Mutations" expanded="True" />
-                    <Node name="Queries" expanded="True" />
-                  </Node>
-                  <Node name="Mutations" expanded="True" />
-                  <Node name="Queries" expanded="True" />
-                  <Node name="Repository" expanded="True" />
-                </Node>
-              </Node>
-              <Node name="MIddleware" expanded="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-      <Pad Id="MonoDevelop.UnitTesting.TestPad">
-        <State name="__root__" />
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State>
-          <Value>id</Value>
-          <Value>ex</Value>
-          <Value>_context</Value>
-        </State>
-      </Pad>
-    </Pads>
-  </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.ItemProperties.cqrsVerticalSlices PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
 </Properties>
