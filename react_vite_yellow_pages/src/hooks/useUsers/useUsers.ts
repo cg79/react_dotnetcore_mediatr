@@ -28,7 +28,7 @@ const useUsers = (currentPage = 1, pageSize = 2) => {
     fetchUsers();
   }, [currentPage, pageSize, reload]);
 
-  return { users, totalCount, loading, error, setReload };
+  return { users, totalCount, loading, error, reload, setReload };
 };
 
 export default useUsers;
