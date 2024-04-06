@@ -2,10 +2,7 @@
 using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
 using cqrsVerticalSlices.Functionalities.User.Dto;
 using cqrsVerticalSlices.Functionalities.User.Repository;
-using cqrsVerticalSlices.Models;
-using CQRSVerticalSlices.Data;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace cqrsVerticalSlices.Mutations
 {

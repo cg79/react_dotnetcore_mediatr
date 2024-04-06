@@ -44,6 +44,7 @@ const EditUser = ({
             id="firstName"
             name="firstName"
             type="text"
+            className="text-input"
             value={editedUser.firstName}
             onChange={handleChange}
           />
@@ -59,6 +60,7 @@ const EditUser = ({
             id="lastName"
             name="lastName"
             type="text"
+            className="text-input"
             value={editedUser.lastName}
             onChange={handleChange}
           />
@@ -74,6 +76,7 @@ const EditUser = ({
             id="phoneNumber"
             name="phoneNumber"
             type="text"
+            className="text-input"
             value={editedUser.phoneNumber}
             onChange={handleChange}
           />

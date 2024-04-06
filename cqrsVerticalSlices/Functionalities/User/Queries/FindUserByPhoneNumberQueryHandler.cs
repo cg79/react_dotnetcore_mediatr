@@ -1,10 +1,6 @@
 ﻿using System;
 using cqrsVerticalSlices.Models;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using System.Threading.Tasks;
-using CQRSVerticalSlices.Data;
 using cqrsVerticalSlices.Functionalities.User.Commands.Queries;
 using cqrsVerticalSlices.Functionalities.User.Repository;
 

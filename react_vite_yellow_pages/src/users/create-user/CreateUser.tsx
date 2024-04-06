@@ -44,6 +44,7 @@ const CreateUser = ({
           <input
             id="firstName"
             type="text"
+            className="text-input"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
@@ -58,6 +59,7 @@ const CreateUser = ({
           <input
             id="lastName"
             type="text"
+            className="text-input"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
@@ -72,6 +74,7 @@ const CreateUser = ({
           <input
             id="phoneNumber"
             type="text"
+            className="text-input"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />

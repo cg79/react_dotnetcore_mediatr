@@ -1,8 +1,6 @@
 ﻿using System;
 using cqrsVerticalSlices.Functionalities.User.Commands.Mutations;
 using cqrsVerticalSlices.Functionalities.User.Repository;
-using cqrsVerticalSlices.Models;
-using CQRSVerticalSlices.Data;
 using MediatR;
 
 namespace cqrsVerticalSlices.Mutations
