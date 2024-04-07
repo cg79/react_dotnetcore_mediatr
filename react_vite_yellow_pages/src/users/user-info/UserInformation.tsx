@@ -28,7 +28,9 @@ const UserInformation = ({
         </div>
 
         <div className="flex right-align">
-          <button onClick={() => onEdit(user)}>Edit</button>
+          <button className="edit-button" onClick={() => onEdit(user)}>
+            Edit
+          </button>
         </div>
         <div className="flex right-align">
           <button onClick={() => onDelete(user)}>Delete</button>

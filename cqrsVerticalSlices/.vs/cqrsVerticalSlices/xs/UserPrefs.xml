@@ -3,40 +3,42 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="Startup.cs">
     <Files>
-      <File FileName="../cqrsTests/Tests/User/Integration/IntegrationTests.cs" Line="26" Column="10" />
-      <File FileName="Controllers/UserController.cs" Line="5" Column="1" />
-      <File FileName="Filter/CaptureResponseActionFilter.cs" Line="50" Column="21" />
-      <File FileName="Functionalities/User/Queries/FindUserByPhoneNumberQueryHandler.cs" />
+      <File FileName="../cqrsTests/Tests/User/Integration/IntegrationTests.cs" />
+      <File FileName="Controllers/UserController.cs" Line="65" Column="25" />
+      <File FileName="Filter/CaptureResponseActionFilter.cs" />
+      <File FileName="Functionalities/User/Queries/FindUserByPhoneNumberQueryHandler.cs" Line="4" Column="24" />
       <File FileName="Functionalities/User/Commands/Mutations/CreateUserCommand.cs" />
       <File FileName="../cqrsTests/Tests/User/Helpers/PhoneNumberGenerator.cs" />
       <File FileName="Functionalities/User/Commands/Queries/FindUserByIdQuery.cs" />
-      <File FileName="Functionalities/User/Queries/FindUserByIdQueryHandler.cs" />
+      <File FileName="Functionalities/User/Queries/FindUserByIdQueryHandler.cs" Line="4" Column="24" />
       <File FileName="Functionalities/User/Repository/IUserRepository.cs" Line="15" Column="20" />
-      <File FileName="Functionalities/User/Repository/UserRepository.cs" Line="73" Column="33" />
+      <File FileName="Functionalities/User/Repository/UserRepository.cs" Line="90" Column="14" />
       <File FileName="../cqrsTests/Tests/User/Queries/UserQueries.Test.cs" />
       <File FileName="Functionalities/User/Commands/Queries/GetUsersQuery.cs" />
-      <File FileName="Functionalities/User/Queries/GetUsersQueryHandler.cs" />
+      <File FileName="Functionalities/User/Queries/GetUsersQueryHandler.cs" Line="6" Column="1" />
       <File FileName="../cqrsTests/Tests/User/Mutations/UserMutations.Test.cs" />
       <File FileName="Functionalities/User/Mutations/DeleteUserByPhoneNumberCommandHandler.cs" Line="5" Column="1" />
-      <File FileName="Functionalities/User/Mutations/UpdateUserCommandHandler.cs" />
+      <File FileName="Functionalities/User/Mutations/UpdateUserCommandHandler.cs" Line="5" Column="1" />
       <File FileName="../cqrsTests/Tests/User/Controller/UserController.Test.cs" />
       <File FileName="../cqrsTests/Tests/User/Repository/UserRepository.Test.cs" />
       <File FileName="../cqrsTests/Tests/User/Repository/DbSetMock.cs" />
-      <File FileName="Program.cs" Line="2" Column="1" />
-      <File FileName="Data/DataContext.cs" Line="16" Column="45" />
+      <File FileName="Program.cs" />
+      <File FileName="Data/DataContext.cs" />
       <File FileName="Helpers/LoggingBehavior.cs" Line="1" Column="1" />
       <File FileName="Helpers/MigrationHelper.cs" Line="1" Column="1" />
-      <File FileName="Models/UserEntity.cs" Line="1" Column="1" />
-      <File FileName="Properties/launchSettings.json" Line="1" Column="1" />
-      <File FileName="appsettings.json" Line="1" Column="1" />
-      <File FileName="Startup.cs" Line="3" Column="26" />
-      <File FileName="Functionalities/User/Mutations/DeleteUserCommandHandler.cs" Line="1" Column="1" />
+      <File FileName="Models/UserEntity.cs" />
+      <File FileName="Properties/launchSettings.json" />
+      <File FileName="appsettings.json" />
+      <File FileName="Startup.cs" Line="26" Column="46" />
+      <File FileName="Functionalities/User/Mutations/DeleteUserCommandHandler.cs" Line="5" Column="1" />
+      <File FileName="Functionalities/User/Mutations/CreateUserCommandHandler.cs" Line="4" Column="15" />
+      <File FileName="Migrations/DataContextModelSnapshot.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="cqrsVerticalSlices">
-            <Node name="cqrsTests">
+            <Node name="cqrsTests" expanded="True">
               <Node name="Tests" expanded="True">
                 <Node name="User" expanded="True">
                   <Node name="Integration" expanded="True" />
@@ -50,10 +52,12 @@
               <Node name="Functionalities" expanded="True">
                 <Node name="User" expanded="True">
                   <Node name="Mutations" expanded="True" />
+                  <Node name="Queries" expanded="True" />
                   <Node name="Repository" expanded="True" />
                 </Node>
               </Node>
               <Node name="Helpers" expanded="True" />
+              <Node name="Migrations" expanded="True" />
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
             </Node>
@@ -62,21 +66,10 @@
       </Pad>
       <Pad Id="MonoDevelop.UnitTesting.TestPad">
         <State name="__root__">
-          <Node name="cqrsVerticalSlices">
+          <Node name="cqrsVerticalSlices" selected="True">
             <Node name="cqrsTests">
-              <Node name="cqrsTests.Tests.User.Integration">
-                <Node name="UserControllerIntegrationTests" expanded="True">
-                  <Node name="UpdateUser_ExistingUser_ReturnsNoContent - edee0882-94ea-b003-2bd8-f3235cf11961" selected="True" />
-                </Node>
-              </Node>
-              <Node name="cqrsTests.Tests.User.Mutations">
+              <Node name="cqrsTests.Tests.User.Mutations" expanded="True">
                 <Node name="CreateUserCommandHandlerTests" expanded="True" />
-              </Node>
-              <Node name="cqrsTests.Tests.User.Queries">
-                <Node name="UserQueries" expanded="True" />
-              </Node>
-              <Node name="cqrsTests.Tests.User.Repository.YourNamespace.Tests.Functionalities.User.Repository">
-                <Node name="UserRepositoryTests" expanded="True" />
               </Node>
             </Node>
           </Node>

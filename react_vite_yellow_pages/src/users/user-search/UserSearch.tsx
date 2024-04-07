@@ -37,7 +37,7 @@ const UserSearch = () => {
     <div>
       <label htmlFor="phoneNumber">Search by Phone Number:</label>
       <input
-        id="phoneNumber"
+        id="phoneNumberSearch"
         type="text"
         className="text-input"
         value={phoneNumber}
